@@ -51,10 +51,8 @@ export default function CalendarPage() {
 
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">Can&apos;t find what you&apos;re looking for? Have questions about our events?</p>
-            <Link href="/contact">
-              <a className="inline-block bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded transition-colors duration-200">
-                Contact Us
-              </a>
+            <Link href="/contact" className="inline-block bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded transition-colors duration-200">
+              Contact Us
             </Link>
           </div>
         </div>
