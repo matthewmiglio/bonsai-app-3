@@ -53,7 +53,7 @@ export default function SignUpPage() {
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Sign-up Form */}
+            {/&quot; Sign-up Form &quot;/}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="p-6 bg-gradient-to-r from-green-700 to-green-800 text-white relative">
                 <h1 className="text-3xl font-bold mb-2">Join Our Bonsai Family</h1>
@@ -91,7 +91,7 @@ export default function SignUpPage() {
               </form>
             </div>
 
-            {/* Membership Benefits */}
+            {/&quot; Membership Benefits &quot;/}
             <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
               <h2 className="text-2xl font-bold text-green-700">Membership Benefits</h2>
               <ul className="space-y-4">
@@ -110,7 +110,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Testimonials */}
+          {/&quot; Testimonials &quot;/}
           <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
             <h2 className="text-2xl font-bold text-green-700">Member Stories</h2>
             <div className="mt-4 space-y-6">
@@ -135,7 +135,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* FAQ Section */}
+          {/&quot; FAQ Section &quot;/}
           <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
             <h2 className="text-2xl font-bold text-green-700">Frequently Asked Questions</h2>
             <div className="mt-4 space-y-4">
