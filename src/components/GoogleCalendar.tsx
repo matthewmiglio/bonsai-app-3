@@ -14,14 +14,12 @@ interface Event {
 
 const CalendarWidget = () => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState(true);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   useEffect(() => {
     const fetchEvents = async () => {
       const eventsData = await getEvents();
       setEvents(Array.isArray(eventsData) ? eventsData : []);
-      setLoading(false);
     };
     fetchEvents();
   }, []);
@@ -56,7 +54,10 @@ const CalendarWidget = () => {
           ◀
         </motion.button>
         <h2 className="text-2xl font-bold">
-          {currentMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+          {currentMonth.toLocaleDateString("en-US", {
+            month: "long",
+            year: "numeric",
+          })}
         </h2>
         <motion.button
           whileTap={{ scale: 0.9 }}
@@ -71,16 +72,19 @@ const CalendarWidget = () => {
       <div className="grid grid-cols-7 gap-2 text-center">
         {[...Array(daysInMonth)].map((_, index) => {
           const day = index + 1;
-          const event = events.find((e) =>
-            new Date(e.start.dateTime || e.start.date || "").getDate() === day
+          const event = events.find(
+            (e) =>
+              new Date(e.start.dateTime || e.start.date || "").getDate() === day
           );
           return (
             <motion.div
               key={day}
               whileHover={{ scale: 1.1 }}
-              className={`p-4 border rounded-lg cursor-pointer transition-all ${event ? "bg-green-200" : "bg-white"}`}
+              className={`p-4 border rounded-lg cursor-pointer transition-all ${
+                event ? "bg-green-200" : "bg-white"
+              }`}
             >
-                <p className="p-5 font-semibold text-xl">{day}</p>
+              <p className="p-5 font-semibold text-xl">{day}</p>
               {event && (
                 <a
                   href={event.htmlLink}
