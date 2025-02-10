@@ -34,11 +34,11 @@ export default function AboutPage() {
             <h2 className="text-2xl font-semibold text-green-700 mb-4">Our History</h2>
             <p className="text-gray-700 mb-4">
               Founded in 1985 by a group of passionate bonsai enthusiasts, the West Michigan Bonsai Club has grown into
-              a thriving community of artists, hobbyists, and nature lovers. For over three decades, we've been
+              a thriving community of artists, hobbyists, and nature lovers. For over three decades, we&apos;ve been
               dedicated to promoting the art of bonsai in the West Michigan area.
             </p>
             <p className="text-gray-700">
-              From our humble beginnings with just a handful of members, we've expanded to become one of the most active
+              From our humble beginnings with just a handful of members, we&apos;ve expanded to become one of the most active
               bonsai clubs in the Midwest, hosting workshops, exhibitions, and educational events throughout the year.
             </p>
           </div>
@@ -85,12 +85,12 @@ export default function AboutPage() {
         <section className="text-center mb-16">
           <h2 className="text-2xl font-semibold text-green-700 mb-4">Join Our Community</h2>
           <p className="text-gray-700 mb-6">
-            Whether you're a seasoned bonsai artist or just starting your journey, we welcome you to join our vibrant
+            Whether you&apos;re a seasoned bonsai artist or just starting your journey, we welcome you to join our vibrant
             community.
           </p>
             <Button
             className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
-            onClick={() => window.location.href = '/signup'}
+            onClick={() => window.location.href = "/signup"}
             >
             Become a Member
             </Button>
