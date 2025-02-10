@@ -85,7 +85,7 @@ export default function GalleryPage() {
     <div className="min-h-screen bg-stone-50">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-green-800 italic mb-8 text-center">Community Gallery</h1>
+        {/* <h1 className="text-4xl font-bold text-green-800 italic mb-8 text-center">Community Gallery</h1> */}
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
           {galleryItems.map((item) => (
             <div key={item.id} className="break-inside-avoid mb-4">
