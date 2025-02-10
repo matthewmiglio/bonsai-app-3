@@ -1,10 +1,8 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Facebook } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
 const FacebookFeed: React.FC = () => {
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const fbPageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
