@@ -2,6 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Facebook } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 
+
+declare global {
+  interface Window {
+    FB: any;
+  }
+}
+
+
 const FacebookFeed: React.FC = () => {
   const fbPageRef = useRef<HTMLDivElement>(null);
 
