@@ -1,14 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   return (
     <header className="bg-white shadow-sm">
       <nav className="container mx-auto px-6 py-3">
         <div className="flex justify-between items-center">
-          <img
+          <Image
             src="/LogoBlack5.png"
             alt="Bonsai App Logo"
-            className="w-[75px] h-[75px] transition-all duration-300 ease-in-out transform hover:scale-105"
+            width={75}
+            height={75}
+            className="transition-all duration-300 ease-in-out transform hover:scale-105"
           />
 
           <Link href="/" className="text-4xl font-semibold text-green-800">
