@@ -3,7 +3,6 @@ import Hero from "../components/Hero";
 import WhatWereAbout from "../components/WhatWereAbout";
 import FacebookFeed from "../components/Facebook";
 import Footer from "../components/Footer";
-import CalendarWidget from "../components/GoogleCalendar";
 import Gallery from "../components/GalleryComponent";
 import SignUpAd from "../components/SignUpAd";
 import "../styles/globals.css";
