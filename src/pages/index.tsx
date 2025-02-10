@@ -16,16 +16,21 @@ export default function Home() {
         <Hero />
 
         <WhatWereAbout />
-        <section className="container mx-auto px-4 py-12 justify-items-center">
-          <div className="grid md:grid-cols-3 gap-12 items-start">
-            <Gallery />
-            <FacebookFeed />
-            <CalendarWidget />
-            </div>
-        </section>
+
         <div className="p-10 justify-items-center">
           <SignUpAd />
         </div>
+
+        <div className = 'justify-items-center p-10'>
+        <CalendarWidget />
+        </div>
+        <section className="container mx-auto px-4 py-12 justify-items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <Gallery />
+            <FacebookFeed />
+            </div>
+        </section>
+
       </main>
       <Footer />
     </div>
