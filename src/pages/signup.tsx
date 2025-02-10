@@ -52,12 +52,16 @@ export default function SignUpPage() {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/&quot; Sign-up Form &quot;/}
+
+          <div className="grid lg:grid-cols-2 gap-8 items-start ">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="p-6 bg-gradient-to-r from-green-700 to-green-800 text-white relative">
-                <h1 className="text-3xl font-bold mb-2">Join Our Bonsai Family</h1>
-                <p className="opacity-90">Start your journey in the art of bonsai</p>
+                <h1 className="text-3xl font-bold mb-2">
+                  Join Our Bonsai Family
+                </h1>
+                <p className="opacity-90">
+                  Start your journey in the art of bonsai
+                </p>
               </div>
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
                 {["fname", "lname", "email", "phone"].map((field) => (
@@ -76,24 +80,40 @@ export default function SignUpPage() {
                         required
                       />
                       {field === "email" ? (
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                        <Mail
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={18}
+                        />
                       ) : field === "phone" ? (
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                        <Phone
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={18}
+                        />
                       ) : (
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                        <User
+                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={18}
+                        />
                       )}
                     </div>
                   </div>
                 ))}
-                <Button type="submit" className="w-full bg-green-700 hover:bg-green-800 text-white">
+                <Button
+                  type="submit"
+                  className="w-full bg-green-700 hover:bg-green-800 text-white"
+                >
                   Join Now
                 </Button>
               </form>
             </div>
 
-            {/&quot; Membership Benefits &quot;/}
-            <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
-              <h2 className="text-2xl font-bold text-green-700">Membership Benefits</h2>
+
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+              <h2 className="text-2xl font-bold text-green-700">
+                Membership Benefits
+              </h2>
               <ul className="space-y-4">
                 {[
                   "Community Access - Join a vibrant bonsai community",
@@ -108,44 +128,66 @@ export default function SignUpPage() {
                 ))}
               </ul>
             </div>
-          </div>
 
-          {/&quot; Testimonials &quot;/}
           <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
-            <h2 className="text-2xl font-bold text-green-700">Member Stories</h2>
+            <h2 className="text-2xl font-bold text-green-700">
+              Member Stories
+            </h2>
             <div className="mt-4 space-y-6">
               {[
                 {
-                  quote: "Joining the club transformed my bonsai journey. The community is incredibly supportive!",
+                  quote:
+                    "Joining the club transformed my bonsai journey. The community is incredibly supportive!",
                   name: "Sarah K.",
                   year: "Member since 2020",
                 },
                 {
-                  quote: "The workshops and expert guidance helped me develop my skills tremendously.",
+                  quote:
+                    "The workshops and expert guidance helped me develop my skills tremendously.",
                   name: "Michael R.",
                   year: "Member since 2019",
                 },
               ].map((testimonial, index) => (
                 <div key={index} className="border-l-4 border-green-700 pl-4">
-                  <p className="italic text-gray-700">"{testimonial.quote}"</p>
-                  <p className="text-sm font-semibold text-green-700 mt-2">{testimonial.name}</p>
+                  <p className="italic text-gray-700">
+                    &quot;{testimonial.quote}&quot;
+                  </p>
+                  <p className="text-sm font-semibold text-green-700 mt-2">
+                    {testimonial.name}
+                  </p>
                   <p className="text-xs text-gray-500">{testimonial.year}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/&quot; FAQ Section &quot;/}
           <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
-            <h2 className="text-2xl font-bold text-green-700">Frequently Asked Questions</h2>
+            <h2 className="text-2xl font-bold text-green-700">
+              Frequently Asked Questions
+            </h2>
             <div className="mt-4 space-y-4">
               {[
-                { question: "What does membership include?", answer: "Membership includes access to workshops, resources, exhibitions, and a supportive community." },
-                { question: "How often do you meet?", answer: "We hold monthly workshops and additional events throughout the year." },
-                { question: "I&apos;m a complete beginner. Is this club for me?", answer: "Absolutely! Our club welcomes all skill levels and provides guidance for beginners." },
+                {
+                  question: "What does membership include?",
+                  answer:
+                    "Membership includes access to workshops, resources, exhibitions, and a supportive community.",
+                },
+                {
+                  question: "How often do you meet?",
+                  answer:
+                    "We hold monthly workshops and additional events throughout the year.",
+                },
+                {
+                  question:
+                    "I&apos;m a complete beginner. Is this club for me?",
+                  answer:
+                    "Absolutely! Our club welcomes all skill levels and provides guidance for beginners.",
+                },
               ].map((faq, index) => (
                 <div key={index}>
-                  <h3 className="font-semibold text-gray-800">{faq.question}</h3>
+                  <h3 className="font-semibold text-gray-800">
+                    {faq.question}
+                  </h3>
                   <p className="text-gray-600">{faq.answer}</p>
                 </div>
               ))}
