@@ -17,7 +17,7 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="text-gray-600 text-lg">
-              Have questions about the WMBC? We'd love to hear from you!
+              Have questions about the WMBC? We&apos;d love to hear from you!
             </p>
           </div>
 
