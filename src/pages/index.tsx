@@ -20,15 +20,13 @@ export default function Home() {
           <SignUpAd />
         </div>
 
-        <div className = 'justify-items-center p-10'>
-        </div>
+        <div className="justify-items-center p-10"></div>
         <section className="container mx-auto px-4 py-12 justify-items-center">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <Gallery />
             <FacebookFeed />
-            </div>
+          </div>
         </section>
-
       </main>
       <Footer />
     </div>
