@@ -21,15 +21,22 @@ export default function Header() {
             <Link href="/" className="text-gray-600 hover:text-green-800">
               Home
             </Link>
-            <Link href="/about" className="text-gray-600 hover:text-green-800">
-              About
-            </Link>
             <Link
               href="/gallery"
               className="text-gray-600 hover:text-green-800"
             >
               Gallery
+            </Link> <Link
+              href="/calendar"
+              className="text-gray-600 hover:text-green-800"
+            >
+              Calendar
             </Link>
+
+            <Link href="/about" className="text-gray-600 hover:text-green-800">
+              About
+            </Link>
+
             <Link href="/signup" className="text-gray-600 hover:text-green-800">
               Sign Up
             </Link>
