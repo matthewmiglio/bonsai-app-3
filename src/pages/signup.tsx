@@ -142,7 +142,7 @@ export default function SignUpPage() {
               {[
                 { question: "What does membership include?", answer: "Membership includes access to workshops, resources, exhibitions, and a supportive community." },
                 { question: "How often do you meet?", answer: "We hold monthly workshops and additional events throughout the year." },
-                { question: "I'm a complete beginner. Is this club for me?", answer: "Absolutely! Our club welcomes all skill levels and provides guidance for beginners." },
+                { question: "I&apos;m a complete beginner. Is this club for me?", answer: "Absolutely! Our club welcomes all skill levels and provides guidance for beginners." },
               ].map((faq, index) => (
                 <div key={index}>
                   <h3 className="font-semibold text-gray-800">{faq.question}</h3>
