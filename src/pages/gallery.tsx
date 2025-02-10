@@ -1,85 +1,90 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import type { Metadata } from "next"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { X } from "lucide-react"
+import { useState } from "react";
+import Image from "next/image";
+import type { Metadata } from "next";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { X } from "lucide-react";
 import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Bonsai Gallery - West Michigan Bonsai Club",
-  description: "Explore our collection of beautiful bonsai trees from the West Michigan Bonsai Club.",
-}
+  description:
+    "Explore our collection of beautiful bonsai trees from the West Michigan Bonsai Club.",
+};
 
 interface GalleryItem {
-  id: number
-  src: string
-  alt: string
-  caption: string
+  id: number;
+  src: string;
+  alt: string;
+  caption: string;
 }
 
 const galleryItems: GalleryItem[] = [
   {
     id: 1,
-    src: "/ai_bonsai_3.jpeg?height=800&width=600",
-    alt: "Japanese Maple Bonsai",
-    caption: "A 30-year-old Japanese Maple showcasing vibrant autumn colors",
+    src: "/best_novice_2024_PC_1st_Steve_Jetzer.jpg?height=800&width=600",
+    alt: "First Place Bonsai - Japanese Maple by Steve Jetzer",
+    caption:
+      "First Place - Steve Jetzer: A beautifully refined Japanese Maple bonsai with stunning ramification.",
   },
   {
     id: 2,
-    src: "/ai_bonsai_1.jpeg?height=600&width=800",
-    alt: "Pine Bonsai",
-    caption: "Ancient pine bonsai with weathered bark and cascading branches",
+    src: "/best_novice_2024_pc_2nd_tara_rietberg.jpg?height=600&width=800",
+    alt: "Second Place Bonsai - Pine Bonsai by Tara Rietberg",
+    caption:
+      "Second Place - Tara Rietberg: A powerful Pine bonsai with rugged bark and expertly styled branches.",
   },
   {
     id: 3,
-    src: "/ai_bonsai_2.jpeg?height=700&width=500",
-    alt: "Juniper Bonsai",
-    caption: "Elegant Juniper bonsai styled in the windswept form",
+    src: "/best_novice_2024_pc_3rd_place_tina_chirco.jpg?height=700&width=500",
+    alt: "Third Place Bonsai - Juniper Bonsai by Tina Chirco",
+    caption:
+      "Third Place - Tina Chirco: A graceful Juniper bonsai styled in a dynamic windswept design.",
   },
+
   {
     id: 4,
-    src: "/ai_bonsai_4.jpeg?height=900&width=600",
+    src: "/fmg-celebrating-25-years-enews-3288341110.jpg?height=900&width=600",
     alt: "Cherry Blossom Bonsai",
     caption: "Delicate cherry blossom bonsai in full bloom",
   },
   {
     id: 5,
-    src: "/ai_bonsai_1.jpeg?height=600&width=700",
+    src: "/Meijer-Gardens-1260x680-147744548.jpg?height=600&width=700",
     alt: "Azalea Bonsai",
     caption: "Vibrant Azalea bonsai with a profusion of pink flowers",
   },
   {
     id: 6,
-    src: "/ai_bonsai_2.jpeg?height=800&width=800",
+    src: "/mi-frederik-meijer-gardens-and-sculpture-park-japanese-garden-460172177.jpg?height=800&width=800",
     alt: "Bonsai Forest",
     caption: "Miniature forest of deciduous bonsai trees",
   },
   {
     id: 7,
-    src: "/ai_bonsai_3.jpeg?height=700&width=600",
+    src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg?height=700&width=600",
     alt: "Elm Bonsai",
     caption: "Graceful Chinese Elm with delicate leaves and exposed roots",
   },
   {
     id: 8,
-    src: "/ai_bonsai_1.jpeg?height=600&width=900",
+    src: "/matt_stolen_bonsai_pic.jpg?height=600&width=900",
     alt: "Maple Grove Bonsai",
     caption: "A group planting of maples showcasing seasonal changes",
   },
   {
     id: 9,
-    src: "/ai_bonsai_4.jpeg?height=800&width=700",
+    src: "/87013f68c55b7793b59650f9517e384c-31951087.jpg?height=800&width=700",
     alt: "Bougainvillea Bonsai",
     caption: "Flowering Bougainvillea bonsai with cascading branches",
   },
-]
+];
 
 export default function GalleryPage() {
-  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null)
+  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -109,7 +114,10 @@ export default function GalleryPage() {
         </div>
       </main>
       <Footer />
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+      <Dialog
+        open={!!selectedImage}
+        onOpenChange={() => setSelectedImage(null)}
+      >
         <DialogContent className="max-w-3xl w-full bg-white rounded-lg overflow-hidden">
           <div className="relative">
             {selectedImage && (
@@ -139,6 +147,5 @@ export default function GalleryPage() {
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
-
