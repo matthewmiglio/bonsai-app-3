@@ -3,6 +3,7 @@ import Footer from "../components/Footer"
 import CalendarWidget from "../components/GoogleCalendar"
 import { Leaf, CalendarIcon, Clock } from "lucide-react"
 import "../styles/globals.css"
+import Link from "next/link"
 
 export default function CalendarPage() {
   return (
@@ -49,13 +50,12 @@ export default function CalendarPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-4">Can't find what you're looking for? Have questions about our events?</p>
-            <a
-              href="/contact"
-              className="inline-block bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded transition-colors duration-200"
-            >
-              Contact Us
-            </a>
+            <p className="text-gray-600 mb-4">Can&apos;t find what you&apos;re looking for? Have questions about our events?</p>
+            <Link href="/contact">
+              <a className="inline-block bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded transition-colors duration-200">
+                Contact Us
+              </a>
+            </Link>
           </div>
         </div>
       </main>
