@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Facebook } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 const FacebookFeed: React.FC = () => {
   const fbPageRef = useRef<HTMLDivElement>(null);

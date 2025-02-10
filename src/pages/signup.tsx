@@ -12,10 +12,9 @@ import "../styles/globals.css";
 
 export default function SignUpPage() {
   const [formState, setFormState] = useState({
-    
+
   });
 
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
