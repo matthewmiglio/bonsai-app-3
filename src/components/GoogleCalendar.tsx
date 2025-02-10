@@ -101,7 +101,7 @@ const CalendarWidget = () => {
       </div>
 
       {/* View Full Calendar */}
-      <div className="text-center mt-4">
+      {/* <div className="text-center mt-4">
         <a
           href="https://calendar.google.com/calendar/u/0/r"
           target="_blank"
@@ -110,7 +110,7 @@ const CalendarWidget = () => {
         >
           View Full Calendar
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };
