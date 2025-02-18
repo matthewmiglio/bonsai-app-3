@@ -3,17 +3,19 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Gallery() {
-  const galleryItems = [
-    { src: "/ai_bonsai_1.jpeg?height=300&width=300", alt: "Bonsai 1" },
-    { src: "/ai_bonsai_2.jpeg?height=300&width=300", alt: "Bonsai 2" },
-    { src: "/ai_bonsai_3.jpeg?height=300&width=300", alt: "Bonsai 3" },
-    { src: "/ai_bonsai_4.jpeg?height=300&width=300", alt: "Bonsai 4" },
-    { src: "/ai_bonsai_4.jpeg?height=300&width=300", alt: "Bonsai 4" },
-    { src: "/ai_bonsai_4.jpeg?height=300&width=300", alt: "Bonsai 4" },
-    { src: "/ai_bonsai_4.jpeg?height=300&width=300", alt: "Bonsai 4" },
-    { src: "/ai_bonsai_4.jpeg?height=300&width=300", alt: "Bonsai 4" },
-    { src: "/ai_bonsai_4.jpeg?height=300&width=300", alt: "Bonsai 4" },
-  ];
+  const galleryItems = Array.from({ length: 28 }, (_, index) => ({
+    src: `/fb_bonsai_${index + 1}.jpg?height=300&width=300`,
+    alt: `Bonsai ${index + 1}`,
+  }));
+  function shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  shuffleArray(galleryItems);
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[720px]">
