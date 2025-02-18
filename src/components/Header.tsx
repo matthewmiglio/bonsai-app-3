@@ -2,6 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
+  const shopLink = process.env.NEXT_PUBLIC_STORE_LINK || "";
+
+
   return (
     <header className="bg-white shadow-sm">
       <nav className="container mx-auto px-6 py-3">
@@ -26,7 +29,19 @@ export default function Header() {
               className="text-gray-600 hover:text-green-800"
             >
               Gallery
-            </Link> <Link
+            </Link>
+
+            <Link
+              href={shopLink}
+              className="text-gray-600 hover:text-green-800"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Shop
+            </Link>
+
+
+            <Link
               href="/calendar"
               className="text-gray-600 hover:text-green-800"
             >
@@ -36,6 +51,8 @@ export default function Header() {
             <Link href="/about" className="text-gray-600 hover:text-green-800">
               About
             </Link>
+
+
 
             <Link href="/signup" className="text-gray-600 hover:text-green-800">
               Sign Up
