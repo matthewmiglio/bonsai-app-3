@@ -13,9 +13,6 @@ export default function ContactPage() {
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-green-800 mb-4">
-              Get in Touch
-            </h1>
             <p className="text-gray-600 text-lg">
               Have questions about the WMBC? We&apos;d love to hear from you!
             </p>
