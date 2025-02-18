@@ -28,9 +28,9 @@ export default function SignUpPage() {
         body: JSON.stringify(formState),
       });
 
-      const data = await response.json();
+      // const data = await response.json();
       if (response.ok) emailSuccess = true;
-      console.log("Email response:", data);
+      // console.log("Email response:", data);
     } catch (error) {
       console.log("Error occurred while sending the email:", error);
     }
@@ -42,9 +42,9 @@ export default function SignUpPage() {
         body: JSON.stringify(formState),
       });
 
-      const data = await response.json();
+      // const data = await response.json();
       if (response.ok) tableSuccess = true;
-      console.log("User added:", data);
+      // console.log("User added:", data);
     } catch (error) {
       console.log("Error occurred while adding the user:", error);
     }
