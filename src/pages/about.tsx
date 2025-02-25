@@ -44,7 +44,7 @@ export default function AboutPage() {
               community of bonsai enthusiasts, dedicated to cultivating a deeper
               appreciation for bonsai by bringing together individuals
               passionate about this ancient art form. We invite you to join us
-              on our journey, whether you're a curious newcomer or a seasoned
+              on our journey, whether you&apos;re a curious newcomer or a seasoned
               practitioner.
             </p>
             <p className="text-gray-700 text-bold mb-4">
