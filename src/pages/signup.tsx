@@ -28,9 +28,7 @@ export default function SignUpPage() {
         body: JSON.stringify(formState),
       });
 
-      // const data = await response.json();
       if (response.ok) emailSuccess = true;
-      // console.log("Email response:", data);
     } catch (error) {
       console.log("Error occurred while sending the email:", error);
     }
@@ -42,9 +40,7 @@ export default function SignUpPage() {
         body: JSON.stringify(formState),
       });
 
-      // const data = await response.json();
       if (response.ok) tableSuccess = true;
-      // console.log("User added:", data);
     } catch (error) {
       console.log("Error occurred while adding the user:", error);
     }
@@ -80,10 +76,11 @@ export default function SignUpPage() {
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="p-6 bg-gradient-to-r from-green-700 to-green-800 text-white relative">
                 <h1 className="text-3xl font-bold mb-2">
-                  Join Our Bonsai Family
+                  Join the West Michigan Bonsai Club
                 </h1>
                 <p className="opacity-90">
-                  Start your journey in the art of bonsai
+                  Whether you're a curious newcomer or a seasoned practitioner,
+                  join us in cultivating a deeper appreciation for bonsai.
                 </p>
               </div>
               <div>
@@ -143,12 +140,15 @@ export default function SignUpPage() {
                 <ul className="space-y-4">
                   {[
                     "Community Access - Join a vibrant bonsai community",
-                    "Monthly Workshops - Hands-on sessions with expert guidance",
-                    "Learning Resources - Access our extensive bonsai care library",
-                    "Exhibition Space - Showcase your bonsai at our annual exhibition",
+                    "Monthly Meetings - Held at Frederik Meijer Gardens and Sculpture Park from March to December",
+                    "Workshops & Education - Learn everything from beginner basics to advanced techniques",
+                    "Exclusive Exhibits - Twice a year, showcase your trees at public exhibits, including the All-State Bonsai Show and the West Michigan Bonsai Club Show",
                   ].map((benefit, index) => (
                     <li key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="text-green-700" size={20} />
+                      <CheckCircle
+                        className="text-green-700 flex-shrink-0"
+                        size={20}
+                      />
                       <span className="text-gray-700">{benefit}</span>
                     </li>
                   ))}
@@ -204,18 +204,17 @@ export default function SignUpPage() {
                 {
                   question: "What does membership include?",
                   answer:
-                    "Membership includes access to workshops, resources, exhibitions, and a supportive community.",
+                    "Membership gives you access to meetings, workshops, garden tours, and exclusive exhibits, plus opportunities to join special programs and workshops with bonsai professionals. Your support helps grow the art of bonsai in our region.",
                 },
                 {
                   question: "How often do you meet?",
                   answer:
-                    "We hold monthly workshops and additional events throughout the year.",
+                    "We meet monthly from March to December at Frederik Meijer Gardens and Sculpture Park.",
                 },
                 {
-                  question:
-                    "I&apos;m a complete beginner. Is this club for me?",
+                  question: "I’m a complete beginner. Is this club for me?",
                   answer:
-                    "Absolutely! Our club welcomes all skill levels and provides guidance for beginners.",
+                    "Absolutely! We welcome all skill levels and provide guidance for beginners through classes and workshops.",
                 },
               ].map((faq, index) => (
                 <div key={index}>
