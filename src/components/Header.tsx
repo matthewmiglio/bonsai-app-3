@@ -10,10 +10,11 @@ export default function Header() {
       <nav className="container mx-auto px-6 py-3">
         <div className="flex justify-between items-center">
           <Image
-            src="/LogoBlack5.png"
+            // src="/LogoBlack5.png"
+            src="/logo6_black.png"
             alt="Bonsai App Logo"
-            width={75}
-            height={75}
+            width={120}
+            height={120}
             className="transition-all duration-300 ease-in-out transform hover:scale-105"
           />
 
