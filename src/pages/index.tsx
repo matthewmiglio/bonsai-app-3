@@ -13,6 +13,7 @@ Todo
 -bluehost migration
 -Use logo with black lettering
 -Fill out contact info with real info
+-captions for gallery images
 */
 
 export default function Home() {
