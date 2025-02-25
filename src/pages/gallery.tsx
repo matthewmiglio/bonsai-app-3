@@ -31,40 +31,30 @@ const galleryItems: GalleryItem[] = [
       "First Place - Steve Jetzer: A beautifully refined Japanese Maple bonsai with stunning ramification.",
   },
 
-  //here ***
-
   {
     id: 2,
     src: "/fb_bonsai_21.jpg",
     alt: "",
-    caption: "",
+    caption:
+      "One of the many beautiful bonsai trees on display at the West Michigan Bonsai Club.",
   },
 
   {
     id: 13,
     src: "/fb_bonsai_13.jpg",
     alt: "",
-    caption: "",
+    caption: "Tara Rietberg's amazing Juniper procumbens bonsai.",
   },
 
   {
     id: 4,
     src: "/fmg-celebrating-25-years-enews-3288341110.jpg?height=900&width=600",
     alt: "",
-    caption: "",
+    caption:
+      "Entrance to the Frederik Meijer Gardens & Sculpture Park in Grand Rapids, Michigan.",
   },
-  {
-    id: 5,
-    src: "/Meijer-Gardens-1260x680-147744548.jpg?height=600&width=700",
-    alt: "",
-    caption: "",
-  },
-  {
-    id: 6,
-    src: "/mi-frederik-meijer-gardens-and-sculpture-park-japanese-garden-460172177.jpg?height=800&width=800",
-    alt: "",
-    caption: "",
-  },
+
+
   {
     id: 16,
     src: "/fb_bonsai_19.jpg",
@@ -72,19 +62,20 @@ const galleryItems: GalleryItem[] = [
     caption: "",
   },
 
+
+  //put here
+  {
+    id: 18,
+    src: "/fb_bonsai_25.jpg",
+    alt: "",
+    caption: "",
+  },
   {
     id: 17,
     src: "/best_novice_2024_pc_2nd_tara_rietberg.jpg?height=600&width=800",
     alt: "Second Place Bonsai - Pine Bonsai by Tara Rietberg",
     caption:
       "Second Place - Tara Rietberg: A powerful Pine bonsai with rugged bark and expertly styled branches.",
-  },
-
-  {
-    id: 18,
-    src: "/fb_bonsai_25.jpg",
-    alt: "",
-    caption: "",
   },
   {
     id: 19,
