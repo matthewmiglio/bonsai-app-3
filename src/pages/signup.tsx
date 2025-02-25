@@ -79,7 +79,7 @@ export default function SignUpPage() {
                   Join the West Michigan Bonsai Club
                 </h1>
                 <p className="opacity-90">
-                  Whether you're a curious newcomer or a seasoned practitioner,
+                  Whether you&apos;re a curious newcomer or a seasoned practitioner,
                   join us in cultivating a deeper appreciation for bonsai.
                 </p>
               </div>
