@@ -30,6 +30,15 @@ const CalendarWidget = () => {
     0
   ).getDate();
 
+  const firstDayOfMonth = new Date(
+    currentMonth.getFullYear(),
+    currentMonth.getMonth(),
+    1
+  ).getDay();
+
+  // Adjusting the first day to Monday (assuming Sunday = 0 in getDay())
+  const adjustedFirstDayOfMonth = (firstDayOfMonth === 0 ? 7 : firstDayOfMonth);
+
   const handleNextMonth = () => {
     setCurrentMonth(
       new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1)
@@ -40,6 +49,27 @@ const CalendarWidget = () => {
     setCurrentMonth(
       new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1)
     );
+  };
+
+  const getDayGrid = () => {
+    const days = [];
+
+    // Fill the days before the first day of the month
+    for (let i = 0; i < adjustedFirstDayOfMonth - 1; i++) {
+      days.push(null);
+    }
+
+    // Add days of the month
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(i);
+    }
+
+    // Fill the remaining empty cells to complete the grid
+    while (days.length % 7 !== 0) {
+      days.push(null);
+    }
+
+    return days;
   };
 
   return (
@@ -70,47 +100,57 @@ const CalendarWidget = () => {
 
       {/* Calendar Grid */}
       <div className="grid grid-cols-7 gap-2 text-center">
-        {[...Array(daysInMonth)].map((_, index) => {
-          const day = index + 1;
+        {/* Weekday headers */}
+        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+          <div key={day} className="font-semibold">
+            {day}
+          </div>
+        ))}
+
+        {/* Days of the month */}
+        {getDayGrid().map((day, index) => {
+          if (day === null) {
+            return <div key={index} className="p-4 border rounded-lg"></div>;
+          }
+
           const event = events.find(
             (e) =>
               new Date(e.start.dateTime || e.start.date || "").getDate() === day
           );
+
+          const eventText = event ? event.summary : "";
+          const eventHtmlLink = event ? event.htmlLink : "";
+
           return (
             <motion.div
-              key={day}
-              whileHover={{ scale: 1.1 }}
+              key={index}
+              whileHover={{ scale: 1.05 }}
               className={`p-4 border rounded-lg cursor-pointer transition-all ${
                 event ? "bg-green-200" : "bg-white"
               }`}
             >
-              <p className="p-5 font-semibold text-xl">{day}</p>
+              <p className="font-semibold text-xl ">{day}</p>
               {event && (
                 <a
-                  href={event.htmlLink}
+                  href={eventHtmlLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-green-800 underline"
+                  className="h-9 text-xs text-green-800 underline block mt-1"
                 >
-                  {event.summary}
+                  <span className="whitespace-normal break-words">
+                    {eventText}
+                  </span>
+                </a>
+              )}
+              {!event && (
+                <a className="h-9 text-xs text-green-800 underline block mt-1">
+                  <span className="whitespace-normal break-words"></span>
                 </a>
               )}
             </motion.div>
           );
         })}
       </div>
-
-      {/* View Full Calendar */}
-      {/* <div className="text-center mt-4">
-        <a
-          href="https://calendar.google.com/calendar/u/0/r"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md transition-all"
-        >
-          View Full Calendar
-        </a>
-      </div> */}
     </div>
   );
 };
