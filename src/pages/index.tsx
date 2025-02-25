@@ -13,10 +13,6 @@ Todo
 -bluehost migration
 -Use logo with black lettering
 -Fill out contact info with real info
--Fill about page with real info
--Fill signup page with real info
--Add shop to header
--Fix calendar always starting on sunday
 */
 
 export default function Home() {
