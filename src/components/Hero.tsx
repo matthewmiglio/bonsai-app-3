@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const images = [
-  "/ai_bonsai_1.jpeg",
-  "/ai_bonsai_2.jpeg",
-  "/ai_bonsai_3.jpeg",
-  "/ai_bonsai_4.jpeg",
+  "/ai_bonsai_5.jpeg",
+  "/ai_bonsai_6.jpeg",
+  "/ai_bonsai_7.jpeg",
+  "/ai_bonsai_8.jpeg",
 ];
 
 export default function Hero() {
