@@ -7,7 +7,6 @@ import Gallery from "../components/GalleryComponent";
 import SignUpAd from "../components/SignUpAd";
 import "../styles/globals.css";
 
-
 /*
 Todo
 -fix facebook
@@ -16,12 +15,9 @@ Todo
 -Fill out contact info with real info
 -Fill about page with real info
 -Fill signup page with real info
--Real photos to gallery
 -Add shop to header
 -Fix calendar always starting on sunday
 */
-
-
 
 export default function Home() {
   return (
