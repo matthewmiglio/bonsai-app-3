@@ -30,13 +30,82 @@ const galleryItems: GalleryItem[] = [
     caption:
       "First Place - Steve Jetzer: A beautifully refined Japanese Maple bonsai with stunning ramification.",
   },
+
+  //here ***
+
   {
     id: 2,
+    src: "/fb_bonsai_21.jpg",
+    alt: "",
+    caption: "",
+  },
+
+  {
+    id: 13,
+    src: "/fb_bonsai_13.jpg",
+    alt: "",
+    caption: "",
+  },
+
+  {
+    id: 4,
+    src: "/fmg-celebrating-25-years-enews-3288341110.jpg?height=900&width=600",
+    alt: "",
+    caption: "",
+  },
+  {
+    id: 5,
+    src: "/Meijer-Gardens-1260x680-147744548.jpg?height=600&width=700",
+    alt: "",
+    caption: "",
+  },
+  {
+    id: 6,
+    src: "/mi-frederik-meijer-gardens-and-sculpture-park-japanese-garden-460172177.jpg?height=800&width=800",
+    alt: "",
+    caption: "",
+  },
+  {
+    id: 16,
+    src: "/fb_bonsai_19.jpg",
+    alt: "",
+    caption: "",
+  },
+
+  {
+    id: 17,
     src: "/best_novice_2024_pc_2nd_tara_rietberg.jpg?height=600&width=800",
     alt: "Second Place Bonsai - Pine Bonsai by Tara Rietberg",
     caption:
       "Second Place - Tara Rietberg: A powerful Pine bonsai with rugged bark and expertly styled branches.",
   },
+
+  {
+    id: 18,
+    src: "/fb_bonsai_25.jpg",
+    alt: "",
+    caption: "",
+  },
+  {
+    id: 19,
+    src: "/fb_bonsai_27.jpg",
+    alt: "",
+    caption: "",
+  },
+  {
+    id: 10,
+    src: "/fb_bonsai_1.jpg",
+    alt: "",
+    caption: "",
+  },
+
+  {
+    id: 11,
+    src: "/fb_bonsai_4.jpg",
+    alt: "",
+    caption: "",
+  },
+
   {
     id: 3,
     src: "/best_novice_2024_pc_3rd_place_tina_chirco.jpg?height=700&width=500",
@@ -46,40 +115,35 @@ const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 4,
-    src: "/fmg-celebrating-25-years-enews-3288341110.jpg?height=900&width=600",
-    alt: "Cherry Blossom Bonsai",
-    caption: "Delicate cherry blossom bonsai in full bloom",
+    id: 14,
+    src: "/fb_bonsai_15.jpg",
+    alt: "",
+    caption: "",
   },
   {
-    id: 5,
-    src: "/Meijer-Gardens-1260x680-147744548.jpg?height=600&width=700",
-    alt: "Azalea Bonsai",
-    caption: "Vibrant Azalea bonsai with a profusion of pink flowers",
-  },
-  {
-    id: 6,
-    src: "/mi-frederik-meijer-gardens-and-sculpture-park-japanese-garden-460172177.jpg?height=800&width=800",
-    alt: "Bonsai Forest",
-    caption: "Miniature forest of deciduous bonsai trees",
+    id: 15,
+    src: "/fb_bonsai_17.jpg",
+    alt: "",
+    caption: "",
   },
   {
     id: 7,
-    src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg?height=700&width=600",
-    alt: "Elm Bonsai",
-    caption: "Graceful Chinese Elm with delicate leaves and exposed roots",
+    src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg",
+    alt: "",
+    caption: "",
   },
   {
     id: 8,
-    src: "/matt_stolen_bonsai_pic.jpg?height=600&width=900",
-    alt: "Maple Grove Bonsai",
-    caption: "A group planting of maples showcasing seasonal changes",
+    src: "/matt_stolen_bonsai_pic.jpg",
+    alt: "",
+    caption: "",
   },
+
   {
-    id: 9,
-    src: "/87013f68c55b7793b59650f9517e384c-31951087.jpg?height=800&width=700",
-    alt: "Bougainvillea Bonsai",
-    caption: "Flowering Bougainvillea bonsai with cascading branches",
+    id: 12,
+    src: "/fb_bonsai_12.jpg",
+    alt: "",
+    caption: "",
   },
 ];
 
