@@ -21,7 +21,7 @@ export default function Header() {
           <Link href="/" className="text-4xl font-semibold text-green-800">
             West Michigan Bonsai Club
           </Link>
-          <div className="space-x-4">
+          <div className="text-xl space-x-4">
             <Link href="/" className="text-gray-600 hover:text-green-800">
               Home
             </Link>
