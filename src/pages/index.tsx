@@ -24,11 +24,11 @@ export default function Home() {
 
         <WhatWereAbout />
 
-        <div className="p-10 justify-items-center">
+        <div className="py-4 justify-items-center">
           <SignUpAd />
         </div>
 
-        <div className="justify-items-center p-10"></div>
+        <div className="justify-items-center px-10"></div>
         <section className="container mx-auto px-4 py-12 justify-items-center">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <Gallery />
