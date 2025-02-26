@@ -2,20 +2,24 @@ import { Button } from "@/components/ui/button";
 import { Facebook } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 
-
 declare global {
   interface Window {
     FB: any;
   }
 }
 
-
 const FacebookFeed: React.FC = () => {
   const fbPageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Load the Facebook SDK asynchronously if not already loaded
+    if (!document.getElementById("fb-root")) {
+      const fbRoot = document.createElement("div");
+      fbRoot.id = "fb-root";
+      document.body.appendChild(fbRoot);
+    }
+
     if (!window.FB) {
+      console.log("Loading Facebook SDK...");
       const script = document.createElement("script");
       script.src =
         "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0&appId=1980405622369674";
@@ -23,13 +27,14 @@ const FacebookFeed: React.FC = () => {
       script.defer = true;
       script.crossOrigin = "anonymous";
       script.onload = () => {
+        console.log("Facebook SDK loaded");
         if (window.FB) {
-          window.FB.XFBML.parse(); // Ensure parsing occurs after load
+          window.FB.XFBML.parse();
         }
       };
       document.body.appendChild(script);
     } else {
-      // Re-parse the Facebook widget when the component remounts
+      console.log("Re-parsing Facebook widgets");
       window.FB.XFBML.parse();
     }
   }, []);
@@ -51,7 +56,7 @@ const FacebookFeed: React.FC = () => {
         <div
           ref={fbPageRef}
           className="fb-page"
-          data-href="https://www.facebook.com/West.Michigan.Bonsai.Club"
+          data-href="https://www.facebook.com/West.Michigan.Bonsai.Club/"
           data-tabs="timeline"
           data-width="500"
           data-height="500"
@@ -61,10 +66,10 @@ const FacebookFeed: React.FC = () => {
           data-show-facepile="true"
         >
           <blockquote
-            cite="https://www.facebook.com/West.Michigan.Bonsai.Club"
+            cite="https://www.facebook.com/West.Michigan.Bonsai.Club/"
             className="fb-xfbml-parse-ignore"
           >
-            <a href="https://www.facebook.com/West.Michigan.Bonsai.Club">
+            <a href="https://www.facebook.com/West.Michigan.Bonsai.Club/">
               Loading Facebook feed...
             </a>
           </blockquote>
@@ -77,7 +82,7 @@ const FacebookFeed: React.FC = () => {
           className="w-full bg-blue-600 hover:bg-blue-700 text-white"
           onClick={() =>
             window.open(
-              "https://www.facebook.com/West.Michigan.Bonsai.Club",
+              "https://www.facebook.com/West.Michigan.Bonsai.Club/",
               "_blank"
             )
           }
