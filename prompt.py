@@ -83,8 +83,9 @@ if __name__ == "__main__":
     file_tree_top_dir = os.getcwd()
 
     files_to_print = [
-        r"H:\my_files\my_programs\bonsai-app-2\src\pages\signup.tsx",
-        r"H:\my_files\my_programs\bonsai-app-2\src\pages\api\email.ts",
+       
+        r'H:\my_files\my_programs\bonsai-app-3\src\pages\index.tsx',
+        r'H:\my_files\my_programs\bonsai-app-3\src\components\Facebook.tsx',
     ]
     ignore_folders = [
         "node_modules",
