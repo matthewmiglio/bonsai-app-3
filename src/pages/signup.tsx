@@ -141,8 +141,8 @@ export default function SignUpPage() {
                   {[
                     "Community Access - Join a vibrant bonsai community",
                     "Monthly Meetings - Held at Frederik Meijer Gardens and Sculpture Park from March to December",
-                    "Workshops & Education - Learn everything from beginner basics to advanced techniques",
-                    "Exclusive Exhibits - Twice a year, showcase your trees at public exhibits, including the All-State Bonsai Show and the West Michigan Bonsai Club Show",
+                    "Workshops - Learn everything from beginner basics to advanced techniques",
+                    "Exclusive Exhibits - Showcase your trees at public exhibits",
                   ].map((benefit, index) => (
                     <li key={index} className="flex items-start space-x-3">
                       <CheckCircle
@@ -164,14 +164,14 @@ export default function SignUpPage() {
                     {
                       quote:
                         "Joining the club transformed my bonsai journey. The community is incredibly supportive!",
-                      name: "Sarah K.",
-                      year: "Member since 2020",
+                      name: "Mark L.",
+                      year: "Member since 2018",
                     },
                     {
                       quote:
-                        "The workshops and expert guidance helped me develop my skills tremendously.",
-                      name: "Michael R.",
-                      year: "Member since 2019",
+                        "The workshops and expert guidance really helped me develop my skills.",
+                      name: "Matthew M.",
+                      year: "Member since 2024",
                     },
                   ].map((testimonial, index) => (
                     <div
