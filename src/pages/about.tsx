@@ -25,7 +25,7 @@ export default function AboutPage() {
           </p>
           <div className="relative h-[40vh] mb-8">
             <Image
-              src="/ai_club_meeting_clipart_5.png?height=600&width=1200"
+              src="/ai_bonsai_sale_2.png?height=600&width=1200"
               alt="West Michigan Bonsai Club members"
               layout="fill"
               objectFit="cover"
