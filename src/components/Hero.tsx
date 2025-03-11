@@ -26,8 +26,8 @@ export default function Hero() {
           key={src}
           src={src}
           alt="Beautiful bonsai tree"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentImageIndex ? "opacity-100" : "opacity-0"
           }`}
