@@ -35,8 +35,8 @@ export default function Gallery() {
               <Image
                 src={item.src || "/placeholder.svg"}
                 alt={item.alt}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 className="transition-transform duration-300 hover:scale-110"
               />
             </div>
