@@ -34,7 +34,7 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await fetch("/api/signUpTable", {
+      const response = await fetch("/api/addToSignUpTable", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formState),
