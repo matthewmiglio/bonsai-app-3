@@ -66,6 +66,8 @@ export default function MembersPage() {
     }
   };
 
+  console.log("Status:", status);
+
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
       <Header />
@@ -76,8 +78,8 @@ export default function MembersPage() {
 
         {session && (
           <p className="text-center text-lg text-gray-700">
-            Welcome, <span className="font-bold">{session.user?.name}</span>{" "}
-            ({session.user?.email})
+            Welcome, <span className="font-bold">{session.user?.name}</span> (
+            {session.user?.email})
           </p>
         )}
 
