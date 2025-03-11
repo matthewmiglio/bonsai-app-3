@@ -37,9 +37,9 @@ export default function Header() {
             <Link href="/about" className="text-gray-600 hover:text-green-800">
               About
             </Link>
-            <Link href="/signup" className="text-gray-600 hover:text-green-800">
+            {/* <Link href="/signup" className="text-gray-600 hover:text-green-800">
               Sign Up
-            </Link>
+            </Link> */}
             <Link href="/contact" className="text-gray-600 hover:text-green-800">
               Contact
             </Link>
