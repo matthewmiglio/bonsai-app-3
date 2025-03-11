@@ -150,58 +150,6 @@ export default function MembersPage() {
             )}
           </Card>
         </div>
-
-        {/* Member Resources */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Member Resources</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="events">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="events">Upcoming Events</TabsTrigger>
-                <TabsTrigger value="library">Bonsai Library</TabsTrigger>
-                <TabsTrigger value="achievements">Achievements</TabsTrigger>
-              </TabsList>
-              <TabsContent value="events">
-                <div className="flex items-center space-x-4 mt-4">
-                  <Calendar className="h-6 w-6 text-green-600" />
-                  <div>
-                    <h3 className="font-semibold">Monthly Workshop</h3>
-                    <p className="text-sm text-gray-500">
-                      June 15, 2023 at 10:00 AM
-                    </p>
-                  </div>
-                </div>
-              </TabsContent>
-              <TabsContent value="library">
-                <div className="flex items-center space-x-4 mt-4">
-                  <Book className="h-6 w-6 text-green-600" />
-                  <div>
-                    <h3 className="font-semibold">
-                      Advanced Pruning Techniques
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      New article by John Doe
-                    </p>
-                  </div>
-                </div>
-              </TabsContent>
-              <TabsContent value="achievements">
-                <div className="flex items-center space-x-4 mt-4">
-                  <Trophy className="h-6 w-6 text-green-600" />
-                  <div>
-                    <h3 className="font-semibold">First Bonsai Exhibition</h3>
-                    <p className="text-sm text-gray-500">
-                      Unlock this achievement by participating in our annual
-                      show
-                    </p>
-                  </div>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-        </Card>
       </main>
       <Footer />
     </div>
