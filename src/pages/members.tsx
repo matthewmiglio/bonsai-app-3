@@ -18,10 +18,15 @@ type Message = {
   created_at: string;
 };
 
+const verbose = false
+
 export default function MembersPage() {
   const { data: session, status } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
+
+  if (verbose) console.log("session", session)
+  if (verbose) console.log("status", status)
 
   // Load messages on mount
   useEffect(() => {
