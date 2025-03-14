@@ -24,6 +24,15 @@ export default function MembersPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
 
+  // If session is loading, show a loading message
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-2xl font-bold text-gray-700">Loading...</p>
+      </div>
+    );
+  }
+
   // Fetch messages from Supabase
   const fetchMessages = async () => {
     const { data, error } = await supabase
