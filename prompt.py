@@ -83,8 +83,10 @@ if __name__ == "__main__":
     file_tree_top_dir = os.getcwd()
 
     files_to_print = [
-        r"H:\my_files\my_programs\bonsai-app-3\src\pages\api\addToEmailsTable.ts",
-        r"H:\my_files\my_programs\bonsai-app-3\src\pages\api\isEmailRegistered.ts",
+        r'H:\my_files\my_programs\bonsai-app-3\src\pages\members.tsx',
+        r'H:\my_files\my_programs\bonsai-app-3\src\components\LoginButton.tsx',
+        r'H:\my_files\my_programs\bonsai-app-3\src\pages\api\auth\[...nextauth].ts',
+
     ]
     ignore_folders = [
         "node_modules",

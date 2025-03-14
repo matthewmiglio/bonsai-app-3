@@ -1,71 +1,73 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { supabase } from "@/lib/supabase";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Users } from "lucide-react";
+import { Send } from "lucide-react";
 
-// Placeholder data for member profiles
-const memberProfiles = [
-  {
-    id: 1,
-    name: "John Doe",
-    avatar: "/placeholder.svg?height=40&width=40",
-    level: "Expert",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    avatar: "/placeholder.svg?height=40&width=40",
-    level: "Intermediate",
-  },
-  {
-    id: 3,
-    name: "Bob Johnson",
-    avatar: "/placeholder.svg?height=40&width=40",
-    level: "Beginner",
-  },
-];
-
-// Placeholder data for chat messages
-const initialMessages = [
-  {
-    id: 1,
-    sender: "John Doe",
-    content: "Has anyone tried the new pruning technique?",
-  },
-  { id: 2, sender: "Jane Smith", content: "Yes, it works great for maples!" },
-  {
-    id: 3,
-    sender: "Bob Johnson",
-    content: "I'm still learning. Any tips for beginners?",
-  },
-];
+type Message = {
+  id: number;
+  user_email: string;
+  content: string;
+  created_at: string;
+};
 
 export default function MembersPage() {
   const { data: session, status } = useSession();
-  const [messages, setMessages] = useState(initialMessages);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
 
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newMessage.trim()) {
-      setMessages([
-        ...messages,
-        { id: messages.length + 1, sender: "You", content: newMessage },
-      ]);
-      setNewMessage("");
-    }
-  };
+  // Load messages on mount
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from("messages")
+        .select("*")
+        .order("created_at", { ascending: true });
 
-  console.log("Status:", status);
+      if (error) console.error("Error fetching messages:", error);
+      else setMessages(data || []);
+    };
+
+    fetchMessages();
+
+    // Subscribe to real-time updates
+    const channel = supabase
+      .channel("realtime-chat")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "messages" },
+        (payload) => {
+          setMessages((prev) => [...prev, payload.new as Message]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newMessage.trim() || !session?.user?.email) return;
+
+    const { error } = await supabase.from("messages").insert([
+      {
+        user_email: session.user.email,
+        content: newMessage,
+      },
+    ]);
+
+    if (error) console.error("Error sending message:", error);
+    else setNewMessage("");
+  };
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -75,80 +77,54 @@ export default function MembersPage() {
           Members Area
         </h1>
 
-        {session && (
+        {session ? (
           <p className="text-center text-lg text-gray-700">
             Welcome, <span className="font-bold">{session.user?.name}</span> (
             {session.user?.email})
           </p>
+        ) : (
+          <p className="text-center text-red-500 font-bold">
+            Please log in to use the chat.
+          </p>
         )}
 
-        <div className="grid lg:grid-cols-3 gap-8 mt-6">
-          {/* Member Profiles */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Users className="mr-2" /> Active Members
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ScrollArea className="h-[300px]">
-                {memberProfiles.map((member) => (
-                  <div key={member.id} className="flex items-center mb-4">
-                    <Avatar className="h-10 w-10 mr-4">
-                      <AvatarImage src={member.avatar} alt={member.name} />
-                      <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold">{member.name}</p>
-                      <p className="text-sm text-gray-500">{member.level}</p>
-                    </div>
-                  </div>
-                ))}
-              </ScrollArea>
-            </CardContent>
-          </Card>
+        <Card className="relative mt-6">
+          <CardHeader>
+            <CardTitle>Member Chat</CardTitle>
+          </CardHeader>
+          <CardContent className={`relative ${!session ? "blur-md" : ""}`}>
+            <ScrollArea className="h-[400px] mb-4 border p-2 rounded">
+              {messages.map((message) => (
+                <div key={message.id} className="mb-3">
+                  <p className="text-sm text-gray-600">
+                    <strong>{message.user_email}</strong> -{" "}
+                    {new Date(message.created_at).toLocaleTimeString()}
+                  </p>
+                  <p className="bg-green-100 p-2 rounded-lg">{message.content}</p>
+                </div>
+              ))}
+            </ScrollArea>
 
-          {/* Chat Window */}
-          <Card className="lg:col-span-2 relative">
-            <CardHeader>
-              <CardTitle>Member Chat</CardTitle>
-            </CardHeader>
-            <CardContent
-              className={`relative ${
-                !session ? "blur-md pointer-events-none" : ""
-              }`}
-            >
-              <ScrollArea className="h-[400px] mb-4">
-                {messages.map((message) => (
-                  <div key={message.id} className="mb-4">
-                    <p className="font-semibold">{message.sender}</p>
-                    <p className="bg-green-100 p-2 rounded-lg">
-                      {message.content}
-                    </p>
-                  </div>
-                ))}
-              </ScrollArea>
-              <form onSubmit={handleSendMessage} className="flex">
-                <Input
-                  type="text"
-                  placeholder="Type your message..."
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  className="flex-grow mr-2"
-                />
-                <Button type="submit">
-                  <Send className="h-4 w-4 mr-2" /> Send
-                </Button>
-              </form>
-            </CardContent>
+            <form onSubmit={sendMessage} className="flex">
+              <Input
+                type="text"
+                placeholder="Type your message..."
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                className="flex-grow mr-2"
+              />
+              <Button type="submit" disabled={!session}>
+                <Send className="h-4 w-4 mr-2" /> Send
+              </Button>
+            </form>
+          </CardContent>
 
-            {!session && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white/80 text-gray-700 font-bold">
-                Log in to view members chat history
-              </div>
-            )}
-          </Card>
-        </div>
+          {!session && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/80 text-gray-700 font-bold">
+              Log in to send messages
+            </div>
+          )}
+        </Card>
       </main>
       <Footer />
     </div>
