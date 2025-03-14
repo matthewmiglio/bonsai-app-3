@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { supabase } from "@/lib/supabase";
 import Header from "../components/Header";
@@ -23,8 +23,30 @@ export default function MembersPage() {
   const { data: session, status } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
+  const [showScrollNotification, setShowScrollNotification] = useState(false);
+  const lastInteractionRef = useRef<number>(Date.now());
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Track user interaction
+  const updateInteractionTime = () => {
+    lastInteractionRef.current = Date.now();
+  };
 
+  useEffect(() => {
+    document.addEventListener("scroll", updateInteractionTime);
+    document.addEventListener("keydown", updateInteractionTime);
+    document.addEventListener("click", updateInteractionTime);
+    return () => {
+      document.removeEventListener("scroll", updateInteractionTime);
+      document.removeEventListener("keydown", updateInteractionTime);
+      document.removeEventListener("click", updateInteractionTime);
+    };
+  }, []);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    setShowScrollNotification(false);
+  };
 
   // Fetch messages from Supabase
   const fetchMessages = async () => {
@@ -34,7 +56,18 @@ export default function MembersPage() {
       .order("created_at", { ascending: true });
 
     if (error) console.error("Error fetching messages:", error);
-    else setMessages(data || []);
+    else {
+      const newMessages = data || [];
+      if (messages.length > 0 && newMessages.length > messages.length) {
+        const timeSinceLastInteraction = Date.now() - lastInteractionRef.current;
+        if (timeSinceLastInteraction > 10000) {
+          scrollToBottom();
+        } else {
+          setShowScrollNotification(true);
+        }
+      }
+      setMessages(newMessages);
+    }
   };
 
   useEffect(() => {
@@ -63,7 +96,6 @@ export default function MembersPage() {
     };
   }, []);
 
-  // Send message function
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newMessage.trim() || !session?.user?.email) return;
@@ -80,17 +112,11 @@ export default function MembersPage() {
     } else {
       setNewMessage("");
       fetchMessages(); // Immediately refresh chat after sending a message
+      scrollToBottom();
     }
   };
 
-  // If session is loading, show a loading message
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-2xl font-bold text-gray-700">Loading...</p>
-      </div>
-    );
-  }
+
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -126,7 +152,17 @@ export default function MembersPage() {
                   <p className="bg-green-100 p-2 rounded-lg">{message.content}</p>
                 </div>
               ))}
+              <div ref={messagesEndRef} />
             </ScrollArea>
+
+            {showScrollNotification && (
+              <div
+                className="fixed bottom-10 right-10 bg-green-500 text-white px-4 py-2 rounded cursor-pointer"
+                onClick={scrollToBottom}
+              >
+                Scroll down to see new messages
+              </div>
+            )}
 
             <form onSubmit={sendMessage} className="flex">
               <Input
@@ -141,12 +177,6 @@ export default function MembersPage() {
               </Button>
             </form>
           </CardContent>
-
-          {!session && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/80 text-gray-700 font-bold">
-              Log in to send messages
-            </div>
-          )}
         </Card>
       </main>
       <Footer />
