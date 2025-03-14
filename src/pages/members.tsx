@@ -24,14 +24,7 @@ export default function MembersPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
 
-  // If session is loading, show a loading message
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-2xl font-bold text-gray-700">Loading...</p>
-      </div>
-    );
-  }
+
 
   // Fetch messages from Supabase
   const fetchMessages = async () => {
@@ -89,6 +82,15 @@ export default function MembersPage() {
       fetchMessages(); // Immediately refresh chat after sending a message
     }
   };
+
+  // If session is loading, show a loading message
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-2xl font-bold text-gray-700">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
