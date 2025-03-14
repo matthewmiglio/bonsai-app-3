@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
 
+// Message type definition
 type Message = {
   id: number;
   user_email: string;
@@ -18,31 +19,31 @@ type Message = {
   created_at: string;
 };
 
-const verbose = false
-
 export default function MembersPage() {
   const { data: session, status } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
 
-  if (verbose) console.log("session", session)
-  if (verbose) console.log("status", status)
+  // Fetch messages from Supabase
+  const fetchMessages = async () => {
+    const { data, error } = await supabase
+      .from("messages")
+      .select("*")
+      .order("created_at", { ascending: true });
 
-  // Load messages on mount
+    if (error) console.error("Error fetching messages:", error);
+    else setMessages(data || []);
+  };
+
   useEffect(() => {
-    const fetchMessages = async () => {
-      const { data, error } = await supabase
-        .from("messages")
-        .select("*")
-        .order("created_at", { ascending: true });
+    fetchMessages(); // Initial fetch
 
-      if (error) console.error("Error fetching messages:", error);
-      else setMessages(data || []);
-    };
+    // Set interval to refresh chat every 30 seconds
+    const interval = setInterval(() => {
+      fetchMessages();
+    }, 30000);
 
-    fetchMessages();
-
-    // Subscribe to real-time updates
+    // Subscribe to Supabase real-time updates
     const channel = supabase
       .channel("realtime-chat")
       .on(
@@ -55,10 +56,12 @@ export default function MembersPage() {
       .subscribe();
 
     return () => {
+      clearInterval(interval);
       supabase.removeChannel(channel);
     };
   }, []);
 
+  // Send message function
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newMessage.trim() || !session?.user?.email) return;
@@ -70,8 +73,12 @@ export default function MembersPage() {
       },
     ]);
 
-    if (error) console.error("Error sending message:", error);
-    else setNewMessage("");
+    if (error) {
+      console.error("Error sending message:", error);
+    } else {
+      setNewMessage("");
+      fetchMessages(); // Immediately refresh chat after sending a message
+    }
   };
 
   return (
@@ -102,7 +109,7 @@ export default function MembersPage() {
               {messages.map((message) => (
                 <div key={message.id} className="mb-3">
                   <p className="text-sm text-gray-600">
-                    <strong>{message.user_email}</strong> -{" "}
+                    <strong>{message.user_email}</strong> - {" "}
                     {new Date(message.created_at).toLocaleTimeString()}
                   </p>
                   <p className="bg-green-100 p-2 rounded-lg">{message.content}</p>
