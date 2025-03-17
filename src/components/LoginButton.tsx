@@ -2,6 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { LogIn, LogOut, Leaf } from "lucide-react";
 
 export default function LoginButton() {
   const { data: session } = useSession();
@@ -35,16 +36,18 @@ export default function LoginButton() {
       {session ? (
         <button
           onClick={() => signOut()}
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          className="flex items-center gap-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
         >
+          <LogOut size={20} />
           Logout
         </button>
       ) : (
         <button
           onClick={() => signIn("google")}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="flex items-center gap-1 px-4 py-2 bg-green-800 text-white rounded hover:bg-green-900"
         >
-          Login with Google
+          <Leaf size={20} />
+          Login
         </button>
       )}
     </div>
