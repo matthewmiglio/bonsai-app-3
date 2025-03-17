@@ -59,7 +59,8 @@ export default function MembersPage() {
     else {
       const newMessages = data || [];
       if (messages.length > 0 && newMessages.length > messages.length) {
-        const timeSinceLastInteraction = Date.now() - lastInteractionRef.current;
+        const timeSinceLastInteraction =
+          Date.now() - lastInteractionRef.current;
         if (timeSinceLastInteraction > 10000) {
           scrollToBottom();
         } else {
@@ -71,14 +72,19 @@ export default function MembersPage() {
   };
 
   useEffect(() => {
-    fetchMessages(); // Initial fetch
+    const fetchAndScroll = async () => {
+      await fetchMessages();
+      setTimeout(() => {
+        scrollToBottom();
+      }, 100); // Delay ensures content has time to render
+    };
 
-    // Set interval to refresh chat every 30 seconds
+    fetchAndScroll(); // Initial fetch and scroll
+
     const interval = setInterval(() => {
       fetchMessages();
     }, 30000);
 
-    // Subscribe to Supabase real-time updates
     const channel = supabase
       .channel("realtime-chat")
       .on(
@@ -86,6 +92,7 @@ export default function MembersPage() {
         { event: "INSERT", schema: "public", table: "messages" },
         (payload) => {
           setMessages((prev) => [...prev, payload.new as Message]);
+          setTimeout(() => scrollToBottom(), 100); // Scroll when new messages arrive
         }
       )
       .subscribe();
@@ -115,7 +122,18 @@ export default function MembersPage() {
       scrollToBottom();
     }
   };
+  const formatTimestamp = (timestamp: string) => {
+    // Convert timestamp to UTC and then adjust to user's time zone
+    const utcDate = new Date(timestamp + "Z"); // Ensures it's treated as UTC
 
+    return new Intl.DateTimeFormat(undefined, {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Convert to local time
+    }).format(utcDate);
+  };
 
 
   return (
@@ -146,12 +164,16 @@ export default function MembersPage() {
               {messages.map((message) => (
                 <div key={message.id} className="mb-3">
                   <p className="text-sm text-gray-600">
-                    <strong>{message.user_email}</strong> - {" "}
-                    {new Date(message.created_at).toLocaleTimeString()}
+                    <strong>{message.user_email}</strong> -{" "}
+                    {formatTimestamp(message.created_at)}{" "}
+                    {/* Use the new formatting function */}
                   </p>
-                  <p className="bg-green-100 p-2 rounded-lg">{message.content}</p>
+                  <p className="bg-green-100 p-2 rounded-lg">
+                    {message.content}
+                  </p>
                 </div>
               ))}
+
               <div ref={messagesEndRef} />
             </ScrollArea>
 
