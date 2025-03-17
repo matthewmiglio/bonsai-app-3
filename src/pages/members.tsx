@@ -20,7 +20,7 @@ type Message = {
 };
 
 export default function MembersPage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const lastInteractionRef = useRef<number>(Date.now());
@@ -118,9 +118,9 @@ export default function MembersPage() {
       fetchMessages();
       // Wait 2s before scrolling
       setTimeout(() => {
-        console.log('just send a message. scrolling down after 2s');
+        console.log("just send a message. scrolling down after 2s");
         scrollToBottom();
-        console.log('done scrolling down');
+        console.log("done scrolling down");
       }, 2000);
     }
   };
