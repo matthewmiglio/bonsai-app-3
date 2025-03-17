@@ -4,7 +4,11 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { LogOut, Leaf } from "lucide-react";
 
-export default function LoginButton() {
+interface LoginButtonProps {
+  loginText?: string;
+}
+
+export default function LoginButton({ loginText = "Login" }: LoginButtonProps) {
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -47,7 +51,7 @@ export default function LoginButton() {
           className="flex items-center gap-1 px-4 py-2 bg-green-800 text-white rounded hover:bg-green-900"
         >
           <Leaf size={20} />
-          Login
+          {loginText}
         </button>
       )}
     </div>
