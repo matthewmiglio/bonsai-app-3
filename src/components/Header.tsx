@@ -25,26 +25,40 @@ export default function Header() {
             <Link href="/" className="text-gray-600 hover:text-green-800">
               Home
             </Link>
-            <Link href="/gallery" className="text-gray-600 hover:text-green-800">
+            <Link
+              href="/gallery"
+              className="text-gray-600 hover:text-green-800"
+            >
               Gallery
             </Link>
-            <Link href={shopLink} className="text-gray-600 hover:text-green-800" target="_blank" rel="noopener noreferrer">
+            <Link
+              href={shopLink}
+              className="text-gray-600 hover:text-green-800"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Shop
             </Link>
-            <Link href="/calendar" className="text-gray-600 hover:text-green-800">
+            <Link
+              href="/calendar"
+              className="text-gray-600 hover:text-green-800"
+            >
               Calendar
+            </Link>
+            <Link
+              href="/members"
+              className="text-gray-600 hover:text-green-800"
+            >
+              Members
             </Link>
             <Link href="/about" className="text-gray-600 hover:text-green-800">
               About
             </Link>
-            {/* <Link href="/signup" className="text-gray-600 hover:text-green-800">
-              Sign Up
-            </Link> */}
-            <Link href="/contact" className="text-gray-600 hover:text-green-800">
+            <Link
+              href="/contact"
+              className="text-gray-600 hover:text-green-800"
+            >
               Contact
-            </Link>
-            <Link href="/members" className="text-gray-600 hover:text-green-800">
-              Members
             </Link>
 
             <LoginButton />
