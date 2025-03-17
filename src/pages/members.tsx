@@ -20,32 +20,18 @@ type Message = {
 };
 
 export default function MembersPage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
-  const [showScrollNotification, setShowScrollNotification] = useState(false);
-  const lastInteractionRef = useRef<number>(Date.now());
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const lastMessageIdRef = useRef<number | null>(null);
+  const userScrolledRef = useRef<boolean>(false);
 
-  // Track user interaction
-  const updateInteractionTime = () => {
-    lastInteractionRef.current = Date.now();
-  };
-
-  useEffect(() => {
-    document.addEventListener("scroll", updateInteractionTime);
-    document.addEventListener("keydown", updateInteractionTime);
-    document.addEventListener("click", updateInteractionTime);
-    return () => {
-      document.removeEventListener("scroll", updateInteractionTime);
-      document.removeEventListener("keydown", updateInteractionTime);
-      document.removeEventListener("click", updateInteractionTime);
-    };
-  }, []);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    setShowScrollNotification(false);
+  // Scroll chat window to bottom when necessary
+  const scrollToBottom = (smooth = true) => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   };
 
   // Fetch messages from Supabase
@@ -55,35 +41,30 @@ export default function MembersPage() {
       .select("*")
       .order("created_at", { ascending: true });
 
-    if (error) console.error("Error fetching messages:", error);
-    else {
-      const newMessages = data || [];
-      if (messages.length > 0 && newMessages.length > messages.length) {
-        const timeSinceLastInteraction =
-          Date.now() - lastInteractionRef.current;
-        if (timeSinceLastInteraction > 10000) {
-          scrollToBottom();
-        } else {
-          setShowScrollNotification(true);
-        }
+    if (error) {
+      console.error("Error fetching messages:", error);
+      return;
+    }
+
+    if (!data || data.length === 0) return;
+
+    const lastFetchedId = data[data.length - 1].id;
+
+    if (lastMessageIdRef.current === null || lastFetchedId > lastMessageIdRef.current) {
+      setMessages(data);
+      lastMessageIdRef.current = lastFetchedId;
+
+      // Auto-scroll only if user hasn't scrolled manually
+      if (!userScrolledRef.current) {
+        scrollToBottom();
       }
-      setMessages(newMessages);
     }
   };
 
   useEffect(() => {
-    const fetchAndScroll = async () => {
-      await fetchMessages();
-      setTimeout(() => {
-        scrollToBottom();
-      }, 100); // Delay ensures content has time to render
-    };
+    fetchMessages(); // Initial fetch
 
-    fetchAndScroll(); // Initial fetch and scroll
-
-    const interval = setInterval(() => {
-      fetchMessages();
-    }, 30000);
+    const interval = setInterval(fetchMessages, 10000); // Fetch every 10 seconds
 
     const channel = supabase
       .channel("realtime-chat")
@@ -92,7 +73,12 @@ export default function MembersPage() {
         { event: "INSERT", schema: "public", table: "messages" },
         (payload) => {
           setMessages((prev) => [...prev, payload.new as Message]);
-          setTimeout(() => scrollToBottom(), 100); // Scroll when new messages arrive
+          lastMessageIdRef.current = payload.new.id;
+
+          // Auto-scroll if user is at the bottom
+          if (!userScrolledRef.current) {
+            scrollToBottom();
+          }
         }
       )
       .subscribe();
@@ -103,38 +89,67 @@ export default function MembersPage() {
     };
   }, []);
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newMessage.trim() || !session?.user?.email) return;
+  // Track user scrolling
+  useEffect(() => {
+    const chatDiv = chatContainerRef.current;
+    if (!chatDiv) return;
 
-    const { error } = await supabase.from("messages").insert([
+    const handleScroll = () => {
+      const isAtBottom =
+        chatDiv.scrollHeight - chatDiv.scrollTop === chatDiv.clientHeight;
+      userScrolledRef.current = !isAtBottom;
+    };
+
+    chatDiv.addEventListener("scroll", handleScroll);
+    return () => chatDiv.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const sendMessage = async (e: React.FormEvent) => {
+    console.log('sending message: ', newMessage);
+    e.preventDefault();
+    if (!newMessage.trim() || !session?.user?.email) {
+      console.log('pretty sure email is missing so not sending message');
+
+      return};
+
+    const { data, error } = await supabase.from("messages").insert([
       {
         user_email: session.user.email,
         content: newMessage,
       },
-    ]);
+    ]).select(); // Ensure we get the inserted message back
 
     if (error) {
       console.error("Error sending message:", error);
-    } else {
-      setNewMessage("");
-      fetchMessages(); // Immediately refresh chat after sending a message
+      return;
+    }
+
+    if (data && data.length > 0) {
+      console.log('Verified this message was properly sent: ', data[0]);
+      setMessages((prev) => [...prev, data[0]]); // Append message immediately
+      lastMessageIdRef.current = data[0].id;
+
+      // Auto-scroll to bottom after sending a message
       scrollToBottom();
     }
-  };
-  const formatTimestamp = (timestamp: string) => {
-    // Convert timestamp to UTC and then adjust to user's time zone
-    const utcDate = new Date(timestamp + "Z"); // Ensures it's treated as UTC
 
+    setNewMessage("");
+
+    setTimeout(() => {
+      scrollToBottom(); // Ensure scrolling happens after DOM update
+    }, 100); // Small delay to allow message to render
+  };
+
+  const formatTimestamp = (timestamp: string) => {
+    const utcDate = new Date(timestamp + "Z");
     return new Intl.DateTimeFormat(undefined, {
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
       hour12: true,
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Convert to local time
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }).format(utcDate);
   };
-
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -160,31 +175,20 @@ export default function MembersPage() {
             <CardTitle>Member Chat</CardTitle>
           </CardHeader>
           <CardContent className={`relative ${!session ? "blur-md" : ""}`}>
-            <ScrollArea className="h-[400px] mb-4 border p-2 rounded">
+            <ScrollArea
+              ref={chatContainerRef}
+              className="h-[400px] mb-4 border p-2 rounded overflow-y-auto"
+            >
               {messages.map((message) => (
                 <div key={message.id} className="mb-3">
                   <p className="text-sm text-gray-600">
                     <strong>{message.user_email}</strong> -{" "}
-                    {formatTimestamp(message.created_at)}{" "}
-                    {/* Use the new formatting function */}
+                    {formatTimestamp(message.created_at)}
                   </p>
-                  <p className="bg-green-100 p-2 rounded-lg">
-                    {message.content}
-                  </p>
+                  <p className="bg-green-100 p-2 rounded-lg">{message.content}</p>
                 </div>
               ))}
-
-              <div ref={messagesEndRef} />
             </ScrollArea>
-
-            {showScrollNotification && (
-              <div
-                className="fixed bottom-10 right-10 bg-green-500 text-white px-4 py-2 rounded cursor-pointer"
-                onClick={scrollToBottom}
-              >
-                Scroll down to see new messages
-              </div>
-            )}
 
             <form onSubmit={sendMessage} className="flex">
               <Input
