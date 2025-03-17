@@ -10,8 +10,8 @@ export default function CalendarPage() {
     <div className="min-h-screen bg-stone-50 flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+        <div className="justify-items-center max-w-8xl mx-auto">
+          <div className=" max-w-6xl grid lg:grid-cols-3 gap-8 mb-12">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="flex items-center mb-4">
                 <Leaf className="h-6 w-6 text-green-600 mr-2" />
