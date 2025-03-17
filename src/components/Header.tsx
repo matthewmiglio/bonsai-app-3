@@ -44,7 +44,7 @@ export default function Header() {
               Contact
             </Link>
             <Link href="/members" className="text-gray-600 hover:text-green-800">
-              Members Chat
+              Members
             </Link>
 
             <LoginButton />
