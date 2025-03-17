@@ -3,10 +3,49 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Gallery() {
-  const galleryItems = Array.from({ length: 28 }, (_, index) => ({
-    src: `/fb_bonsai_${index + 1}.jpg?height=300&width=300`,
-    alt: `Bonsai ${index + 1}`,
-  }));
+  const galleryItems = [
+    { src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg", alt: "" },
+    { src: "/best_novice_2024_PC_1st_Steve_Jetzer.jpg", alt: "" },
+    { src: "/best_novice_2024_pc_2nd_tara_rietberg.jpg", alt: "" },
+    { src: "/best_novice_2024_pc_3rd_place_tina_chirco.jpg", alt: "" },
+    { src: "/fb_bonsai_1.jpg", alt: "" },
+    { src: "/fb_bonsai_2.jpg", alt: "" },
+    { src: "/fb_bonsai_3.jpg", alt: "" },
+    { src: "/fb_bonsai_4.jpg", alt: "" },
+    { src: "/fb_bonsai_5.jpg", alt: "" },
+    { src: "/fb_bonsai_6.jpg", alt: "" },
+    { src: "/fb_bonsai_7.jpg", alt: "" },
+    { src: "/fb_bonsai_8.jpg", alt: "" },
+    { src: "/fb_bonsai_9.jpg", alt: "" },
+    { src: "/fb_bonsai_10.jpg", alt: "" },
+    { src: "/fb_bonsai_11.jpg", alt: "" },
+    { src: "/fb_bonsai_12.jpg", alt: "" },
+    { src: "/fb_bonsai_13.jpg", alt: "" },
+    { src: "/fb_bonsai_14.jpg", alt: "" },
+    { src: "/fb_bonsai_15.jpg", alt: "" },
+    { src: "/fb_bonsai_16.jpg", alt: "" },
+    { src: "/fb_bonsai_17.jpg", alt: "" },
+    { src: "/fb_bonsai_18.jpg", alt: "" },
+    { src: "/fb_bonsai_19.jpg", alt: "" },
+    { src: "/fb_bonsai_20.jpg", alt: "" },
+    { src: "/fb_bonsai_21.jpg", alt: "" },
+    { src: "/fb_bonsai_22.jpg", alt: "" },
+    { src: "/fb_bonsai_23.jpg", alt: "" },
+    { src: "/fb_bonsai_24.jpg", alt: "" },
+    { src: "/fb_bonsai_25.jpg", alt: "" },
+    { src: "/fb_bonsai_26.jpg", alt: "" },
+    { src: "/fb_bonsai_27.jpg", alt: "" },
+    { src: "/fb_bonsai_28.jpg", alt: "" },
+
+    {
+      src: "/mi-frederik-meijer-gardens-and-sculpture-park-japanese-garden-460172177.jpg",
+      alt: "",
+    },
+    { src: "/Meijer-Gardens-1260x680-147744548.jpg", alt: "" },
+    { src: "/matt_stolen_bonsai_pic.jpg", alt: "" },
+    { src: "/fmg-celebrating-25-years-enews-3288341110.jpg", alt: "" },
+  ];
+
   function shuffleArray(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
