@@ -2,7 +2,7 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { LogIn, LogOut, Leaf } from "lucide-react";
+import { LogOut, Leaf } from "lucide-react";
 
 export default function LoginButton() {
   const { data: session } = useSession();
