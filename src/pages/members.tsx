@@ -23,7 +23,6 @@ export default function MembersPage() {
   const { data: session, status } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
-  const [showScrollNotification, setShowScrollNotification] = useState(false);
   const lastInteractionRef = useRef<number>(Date.now());
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +44,6 @@ export default function MembersPage() {
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    setShowScrollNotification(false);
   };
 
   // Fetch messages from Supabase
@@ -64,7 +62,6 @@ export default function MembersPage() {
         if (timeSinceLastInteraction > 10000) {
           scrollToBottom();
         } else {
-          setShowScrollNotification(true);
         }
       }
       setMessages(newMessages);
@@ -118,8 +115,13 @@ export default function MembersPage() {
       console.error("Error sending message:", error);
     } else {
       setNewMessage("");
-      fetchMessages(); // Immediately refresh chat after sending a message
-      scrollToBottom();
+      fetchMessages();
+      // Wait 2s before scrolling
+      setTimeout(() => {
+        console.log('just send a message. scrolling down after 2s');
+        scrollToBottom();
+        console.log('done scrolling down');
+      }, 2000);
     }
   };
   const formatTimestamp = (timestamp: string) => {
@@ -134,7 +136,6 @@ export default function MembersPage() {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, // Convert to local time
     }).format(utcDate);
   };
-
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -176,15 +177,6 @@ export default function MembersPage() {
 
               <div ref={messagesEndRef} />
             </ScrollArea>
-
-            {showScrollNotification && (
-              <div
-                className="fixed bottom-10 right-10 bg-green-500 text-white px-4 py-2 rounded cursor-pointer"
-                onClick={scrollToBottom}
-              >
-                Scroll down to see new messages
-              </div>
-            )}
 
             <form onSubmit={sendMessage} className="flex">
               <Input
