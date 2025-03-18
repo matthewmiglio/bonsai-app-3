@@ -5,39 +5,40 @@ import Link from "next/link";
 
 export default function Gallery() {
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+  const [isArrayShuffled, setIsArrayShuffled] = useState(false);
   const galleryItems = [
-    { src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg", alt: "" },
-    { src: "/best_novice_2024_PC_1st_Steve_Jetzer.jpg", alt: "" },
-    { src: "/best_novice_2024_pc_2nd_tara_rietberg.jpg", alt: "" },
-    { src: "/best_novice_2024_pc_3rd_place_tina_chirco.jpg", alt: "" },
-    { src: "/fb_bonsai_1.jpg", alt: "" },
-    { src: "/fb_bonsai_2.jpg", alt: "" },
-    { src: "/fb_bonsai_3.jpg", alt: "" },
-    { src: "/fb_bonsai_4.jpg", alt: "" },
     { src: "/fb_bonsai_5.jpg", alt: "" },
     { src: "/fb_bonsai_6.jpg", alt: "" },
     { src: "/fb_bonsai_7.jpg", alt: "" },
-    { src: "/fb_bonsai_8.jpg", alt: "" },
-    { src: "/fb_bonsai_9.jpg", alt: "" },
-    { src: "/fb_bonsai_10.jpg", alt: "" },
+    { src: "/best_novice_2024_pc_2nd_tara_rietberg.jpg", alt: "" },
     { src: "/fb_bonsai_11.jpg", alt: "" },
+    { src: "/fb_bonsai_1.jpg", alt: "" },
+    { src: "/fb_bonsai_4.jpg", alt: "" },
     { src: "/fb_bonsai_12.jpg", alt: "" },
+    { src: "/fb_bonsai_21.jpg", alt: "" },
+    { src: "/fb_bonsai_22.jpg", alt: "" },
+    { src: "/best_novice_2024_pc_3rd_place_tina_chirco.jpg", alt: "" },
+    { src: "/fb_bonsai_10.jpg", alt: "" },
+    { src: "/fb_bonsai_8.jpg", alt: "" },
+    { src: "/best_novice_2024_PC_1st_Steve_Jetzer.jpg", alt: "" },
+    { src: "/fb_bonsai_24.jpg", alt: "" },
+    { src: "/fb_bonsai_28.jpg", alt: "" },
     { src: "/fb_bonsai_13.jpg", alt: "" },
+    { src: "/fb_bonsai_20.jpg", alt: "" },
     { src: "/fb_bonsai_14.jpg", alt: "" },
-    { src: "/fb_bonsai_15.jpg", alt: "" },
-    { src: "/fb_bonsai_16.jpg", alt: "" },
+    { src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg", alt: "" },
     { src: "/fb_bonsai_17.jpg", alt: "" },
     { src: "/fb_bonsai_18.jpg", alt: "" },
     { src: "/fb_bonsai_19.jpg", alt: "" },
-    { src: "/fb_bonsai_20.jpg", alt: "" },
-    { src: "/fb_bonsai_21.jpg", alt: "" },
-    { src: "/fb_bonsai_22.jpg", alt: "" },
-    { src: "/fb_bonsai_23.jpg", alt: "" },
-    { src: "/fb_bonsai_24.jpg", alt: "" },
-    { src: "/fb_bonsai_25.jpg", alt: "" },
+    { src: "/fb_bonsai_3.jpg", alt: "" },
     { src: "/fb_bonsai_26.jpg", alt: "" },
+    { src: "/fb_bonsai_15.jpg", alt: "" },
+    { src: "/fb_bonsai_2.jpg", alt: "" },
+    { src: "/fb_bonsai_9.jpg", alt: "" },
+    { src: "/fb_bonsai_16.jpg", alt: "" },
+    { src: "/fb_bonsai_23.jpg", alt: "" },
+    { src: "/fb_bonsai_25.jpg", alt: "" },
     { src: "/fb_bonsai_27.jpg", alt: "" },
-    { src: "/fb_bonsai_28.jpg", alt: "" },
 
     {
       src: "/mi-frederik-meijer-gardens-and-sculpture-park-japanese-garden-460172177.jpg",
@@ -49,16 +50,20 @@ export default function Gallery() {
   ];
 
   function shuffleArray(array: any[]) {
+    if (isArrayShuffled) {
+      return array;
+    }
+
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
+    setIsArrayShuffled(true);
     return newArray;
   }
 
-  // Only shuffle once when component mounts
-  const shuffledGalleryItems = useMemo(() => shuffleArray(galleryItems), []);
+  shuffleArray(galleryItems);
 
   // ESC key to close fullscreen
   useEffect(() => {
