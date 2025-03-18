@@ -46,7 +46,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-medium text-gray-900">Location</h3>
-                      <p className="text-gray-600">West Michigan</p>
+                      <p className="text-gray-600">West Michigan  - Frederik Meijer Gardens</p>
                     </div>
                   </div>
                 </div>
