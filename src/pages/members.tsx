@@ -28,7 +28,7 @@ export default function MembersPage() {
   const userScrolledRef = useRef<boolean>(false);
 
   // Scroll chat window to bottom when necessary
-  const scrollToBottom = (smooth = true) => {
+  const scrollToBottom = () => {
     const chatContainer = chatContainerRef.current?.querySelector('[data-radix-scroll-area-viewport]');
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
