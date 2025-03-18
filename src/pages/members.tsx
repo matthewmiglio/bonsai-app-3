@@ -29,10 +29,14 @@ export default function MembersPage() {
 
   // Scroll chat window to bottom when necessary
   const scrollToBottom = (smooth = true) => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    const chatContainer = chatContainerRef.current?.querySelector('[data-radix-scroll-area-viewport]');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    } else {
+      console.log('Tried to scroll to bottom but viewport was not found');
     }
   };
+
 
   // Fetch messages from Supabase
   const fetchMessages = async () => {
@@ -51,18 +55,27 @@ export default function MembersPage() {
     const lastFetchedId = data[data.length - 1].id;
 
     if (lastMessageIdRef.current === null || lastFetchedId > lastMessageIdRef.current) {
+      console.log('There is a new most recent message! Should update last message and scroll to bottom');
       setMessages(data);
       lastMessageIdRef.current = lastFetchedId;
 
       // Auto-scroll only if user hasn't scrolled manually
-      if (!userScrolledRef.current) {
+      //wait 2s
+      setTimeout(() => {
         scrollToBottom();
-      }
+      }, 2000);
     }
   };
 
+
+  const fetchAndScroll = async () => {
+    console.log('Fetching messages then scrolling to bottom')
+    await fetchMessages();
+    scrollToBottom();
+  }
+
   useEffect(() => {
-    fetchMessages(); // Initial fetch
+    fetchAndScroll();
 
     const interval = setInterval(fetchMessages, 10000); // Fetch every 10 seconds
 
@@ -130,7 +143,9 @@ export default function MembersPage() {
       lastMessageIdRef.current = data[0].id;
 
       // Auto-scroll to bottom after sending a message
+      console.log('Scrolling to bottom after sending message...');
       scrollToBottom();
+      console.log('Scrolled to bottom after sending message!');
     }
 
     setNewMessage("");
