@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Leaf } from "lucide-react";
+import LoginButton from "./LoginButton";
 
 export default function SignUpAd() {
   return (
@@ -31,14 +32,15 @@ export default function SignUpAd() {
           Cultivate your skills, root yourself in tradition, and branch out with
           fellow enthusiasts.
         </p>
-        <Link href="/signup">
+        {/* <Link href="/signup">
           <Button
             variant="default"
             className="bg-green-700 hover:bg-green-800 text-white px-8 py-2 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             Sign Up Today
           </Button>
-        </Link>
+        </Link> */}
+        <LoginButton showLogout = {false} loginText="Create an Account"/>
       </div>
     </div>
   );
