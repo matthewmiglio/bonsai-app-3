@@ -8,7 +8,12 @@ interface LoginButtonProps {
   loginText?: string;
 }
 
-export default function LoginButton({ loginText = "Login" }: LoginButtonProps) {
+interface LoginButtonProps {
+  loginText?: string;
+  showLogout?: boolean;
+}
+
+export default function LoginButton({ loginText = "Login", showLogout = true }: LoginButtonProps) {
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -38,13 +43,15 @@ export default function LoginButton({ loginText = "Login" }: LoginButtonProps) {
   return (
     <div>
       {session ? (
-        <button
-          onClick={() => signOut()}
-          className="flex items-center gap-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-        >
-          <LogOut size={20} />
-          Logout
-        </button>
+        showLogout && (
+          <button
+            onClick={() => signOut()}
+            className="flex items-center gap-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          >
+            <LogOut size={20} />
+            Logout
+          </button>
+        )
       ) : (
         <button
           onClick={() => signIn("google")}
