@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 export default function Gallery() {
+  const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
   const galleryItems = [
     { src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg", alt: "" },
     { src: "/best_novice_2024_PC_1st_Steve_Jetzer.jpg", alt: "" },
@@ -47,14 +49,27 @@ export default function Gallery() {
   ];
 
   function shuffleArray(array: any[]) {
-    for (let i = array.length - 1; i > 0; i--) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
-    return array;
+    return newArray;
   }
 
-  shuffleArray(galleryItems);
+  // Only shuffle once when component mounts
+  const shuffledGalleryItems = useMemo(() => shuffleArray(galleryItems), []);
+
+  // ESC key to close fullscreen
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setFullscreenImage(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[720px]">
@@ -69,7 +84,8 @@ export default function Gallery() {
           {galleryItems.map((item, index) => (
             <div
               key={index}
-              className="relative aspect-square rounded-md overflow-hidden"
+              className="relative aspect-square rounded-md overflow-hidden cursor-pointer"
+              onClick={() => setFullscreenImage(item.src)}
             >
               <Image
                 src={item.src || "/placeholder.svg"}
@@ -92,6 +108,22 @@ export default function Gallery() {
           </Button>
         </Link>
       </div>
+
+      {/* Fullscreen Overlay */}
+      {fullscreenImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={() => setFullscreenImage(null)}
+        >
+          <Image
+            src={fullscreenImage}
+            alt="Fullscreen preview"
+            width={1200}
+            height={1200}
+            className="object-contain max-h-full max-w-full"
+          />
+        </div>
+      )}
     </div>
   );
 }
