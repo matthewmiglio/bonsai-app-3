@@ -21,7 +21,6 @@ type Message = {
 
 export default function MembersPage() {
   const { data: session } = useSession();
-  const { data: session } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const chatContainerRef = useRef<HTMLDivElement>(null);
