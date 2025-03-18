@@ -123,7 +123,8 @@ export default function MembersPage() {
     if (!newMessage.trim() || !session?.user?.email) {
       console.log('pretty sure email is missing so not sending message');
 
-      return};
+      return
+    };
 
     const { data, error } = await supabase.from("messages").insert([
       {
