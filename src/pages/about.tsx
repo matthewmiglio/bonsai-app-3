@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Button } from "@/components/ui/button";
 import "../styles/globals.css";
 import LoginButton from "@/components/LoginButton";
 
