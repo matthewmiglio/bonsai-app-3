@@ -98,6 +98,39 @@ export default function ContactPage() {
             </Card>
           </div>
 
+           {/* FAQ */}
+           <div className="bg-white rounded-lg shadow-lg p-6 mt-8 w-full">
+            <h2 className="text-2xl font-bold text-green-700">
+              Frequently Asked Questions
+            </h2>
+            <div className="mt-4 space-y-4">
+              {[
+                {
+                  question: "What does membership include?",
+                  answer:
+                    "Membership gives you access to meetings, workshops, garden tours, and exclusive exhibits, plus opportunities to join special programs and workshops with bonsai professionals. Your support helps grow the art of bonsai in our region.",
+                },
+                {
+                  question: "How often do you meet?",
+                  answer:
+                    "We meet monthly from March to December at Frederik Meijer Gardens and Sculpture Park.",
+                },
+                {
+                  question: "I’m a complete beginner. Is this club for me?",
+                  answer:
+                    "Absolutely! We welcome all skill levels and provide guidance for beginners through classes and workshops.",
+                },
+              ].map((faq, index) => (
+                <div key={index}>
+                  <h3 className="font-semibold text-gray-800">
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-600">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="mt-12 text-center">
             <p className="text-gray-600">
               Looking forward to growing our bonsai community with you!
