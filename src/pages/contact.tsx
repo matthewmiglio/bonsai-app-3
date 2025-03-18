@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, Facebook, Instagram, MapPin } from "lucide-react";
 import Link from "next/link";
 import "../styles/globals.css";
+import LoginButton from "@/components/LoginButton";
 
 export default function ContactPage() {
   return (
@@ -28,21 +29,6 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
                     <div className="bg-green-100 p-3 rounded-full">
-                      <Phone className="h-6 w-6 text-green-700" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Phone</h3>
-                      <a
-                        href="tel:+15862426404"
-                        className="text-gray-600 hover:text-green-700 transition-colors"
-                      >
-                        +1 (586) 242-6404
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-green-100 p-3 rounded-full">
                       <Mail className="h-6 w-6 text-green-700" />
                     </div>
                     <div>
@@ -51,7 +37,7 @@ export default function ContactPage() {
                         href="mailto:matmigg0804@gmail.com"
                         className="text-gray-600 hover:text-green-700 transition-colors"
                       >
-                        matmigg0804@gmail.com
+                        info@wmbonsai.com
                       </a>
                     </div>
                   </div>
@@ -106,12 +92,6 @@ export default function ContactPage() {
                         @westmichiganbonsaiclub
                       </Link>
                     </div>
-                  </div>
-
-                  <div className="mt-8">
-                    <Button className="w-full bg-green-700 hover:bg-green-800 text-white">
-                      Join Our Community
-                    </Button>
                   </div>
                 </div>
               </CardContent>

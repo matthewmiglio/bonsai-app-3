@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
 import "../styles/globals.css";
+import LoginButton from "@/components/LoginButton";
 
 export const metadata: Metadata = {
   title: "About West Michigan Bonsai Club",
@@ -44,8 +45,8 @@ export default function AboutPage() {
               community of bonsai enthusiasts, dedicated to cultivating a deeper
               appreciation for bonsai by bringing together individuals
               passionate about this ancient art form. We invite you to join us
-              on our journey, whether you&apos;re a curious newcomer or a seasoned
-              practitioner.
+              on our journey, whether you&apos;re a curious newcomer or a
+              seasoned practitioner.
             </p>
             <p className="text-gray-700 text-bold mb-4">
               Our Mission is to promote the art of bonsai through awareness,
@@ -76,7 +77,7 @@ export default function AboutPage() {
 
         <section className="mb-16">
           <h2 className="text-2xl font-semibold text-green-700 mb-4">
-          Our Programs and Events
+            Our Programs and Events
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -123,19 +124,16 @@ export default function AboutPage() {
         </section>
 
         <section className="text-center mb-16">
-          <h2 className="text-2xl font-semibold text-green-700 mb-4">
+          <h2 className=" text-2xl font-semibold text-green-700 mb-4">
             Join Our Community
           </h2>
           <p className="text-gray-700 mb-6">
             Whether you&apos;re a seasoned bonsai artist or just starting your
             journey, we welcome you to join our vibrant community.
           </p>
-          <Button
-            className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
-            onClick={() => (window.location.href = "/signup")}
-          >
-            Become a Member
-          </Button>
+            <div className="justify-items-center">
+            <LoginButton loginText="Create an Account" />
+            </div>
         </section>
       </main>
       <Footer />
