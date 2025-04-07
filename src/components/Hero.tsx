@@ -20,7 +20,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full h-[70vh] flex items-center justify-center overflow-hidden">
       {images.map((src, index) => (
         <Image
           key={src}
@@ -35,15 +35,13 @@ export default function Hero() {
       ))}
       <div className="relative z-10 text-center text-white">
         <h1
-          className="text-6xl mb-4 font-normal"
+          className="text-8xl mb-4 font-normal"
           style={{ fontFamily: "'Lobster', cursive" }}
         >
           Cultivating Tranquility
         </h1>
 
-        <p
-          className="text-lg font-light"
-        >
+        <p className="text-lg font-light">
           Discover the art and beauty of bonsai
         </p>
       </div>
