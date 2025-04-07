@@ -12,20 +12,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { email } = req.body;
 
+  console.log("emailExistsInSignups() received email:", email);
+
   if (!email) {
     return res.status(400).json({ message: "Email is required" });
   }
 
   try {
-    console.log("Checking if email exists:", email);
+    console.log("Checking if email exists in SIGNUPs:", email);
 
     const { data, error } = await supabase
-      .from("EMAILs")
+      .from("SIGNUPs")
       .select("email")
       .eq("email", email)
       .single();
 
-    if (error && error.code !== "PGRST116") { // Ignore "row not found" errors
+    if (error && error.code !== "PGRST116") {
       console.error("Error checking email:", error);
       return res.status(500).json({ message: "Error checking email", error });
     }
