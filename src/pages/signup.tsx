@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import LoginButton from "@/components/LoginButton";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
@@ -11,9 +13,17 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import "../styles/globals.css";
 
 export default function SignUpPage() {
-  const [formState, setFormState] = useState({});
+  const { data: session } = useSession();
+  const [formState, setFormState] = useState<Record<string, string>>({});
   const [modalMessage, setModalMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Auto-populate email field when session loads
+  useEffect(() => {
+    if (session?.user?.email) {
+      setFormState((prev) => ({ ...prev, email: session?.user?.email ?? "" }));
+    }
+  }, [session]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,11 +69,23 @@ export default function SignUpPage() {
 
     setModalMessage(message);
     setIsModalOpen(true);
+
+    if (message === "Registration successful!") {
+      //redirect to members page
+      window.location.href = "/members";
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormState((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const fieldLabels: Record<string, string> = {
+    fname: "First name",
+    lname: "Last name",
+    email: "Email",
+    phone: "Phone",
   };
 
   return (
@@ -73,7 +95,7 @@ export default function SignUpPage() {
         <div className="max-w-6xl mx-auto justify-items-center">
           {/* Input Form */}
           <div className="grid lg:grid-cols-2 gap-8 ">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
               <div className="p-6 bg-gradient-to-r from-green-700 to-green-800 text-white relative">
                 <h1 className="text-3xl font-bold mb-2">
                   Join the West Michigan Bonsai Club
@@ -84,24 +106,26 @@ export default function SignUpPage() {
                   bonsai.
                 </p>
               </div>
-              <div>
+
+              <div
+                className={`relative ${
+                  !session ? "blur-sm pointer-events-none" : ""
+                }`}
+              >
                 <form onSubmit={handleSubmit} className="p-6 space-y-4">
                   {["fname", "lname", "email", "phone"].map((field) => (
                     <div key={field} className="space-y-2">
-                      <Label htmlFor={field}>
-                        {field.charAt(0).toUpperCase() + field.slice(1)}
-                      </Label>
+                      <Label htmlFor={field}>{fieldLabels[field]}</Label>
                       <div className="relative">
                         <Input
                           type={field === "email" ? "email" : "text"}
                           id={field}
                           name={field}
-                          value={
-                            formState[field as keyof typeof formState] || ""
-                          }
+                          value={formState[field] || ""}
                           onChange={handleChange}
                           className="pl-10"
                           required
+                          readOnly={field === "email" && !!session?.user?.email}
                         />
                         {field === "email" ? (
                           <Mail
@@ -130,6 +154,17 @@ export default function SignUpPage() {
                   </Button>
                 </form>
               </div>
+
+              {!session && (
+                <div className="absolute inset-0 bg-white bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <p className="text-green-900 font-semibold text-lg">
+                      Please log in to sign up and become a member
+                    </p>
+                    <LoginButton />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Member Benefits */}
@@ -155,6 +190,7 @@ export default function SignUpPage() {
                   ))}
                 </ul>
               </div>
+
               {/* Testimonial */}
               <div className="bg-white rounded-lg shadow-lg p-6 mt-8">
                 <h2 className="text-2xl font-bold text-green-700">
@@ -194,8 +230,6 @@ export default function SignUpPage() {
               </div>
             </div>
           </div>
-
-
         </div>
       </main>
       <Footer />
