@@ -34,9 +34,17 @@ export default function Hero() {
         />
       ))}
       <div className="relative z-10 text-center text-white">
-        <h1 className="text-5xl font-bold mb-4">Cultivating Tranquility</h1>
-        <p className="text-xl">
-        Discover the art and beauty of bonsai
+        <h1
+          className="text-6xl mb-4 font-normal"
+          style={{ fontFamily: "'Lobster', cursive" }}
+        >
+          Cultivating Tranquility
+        </h1>
+
+        <p
+          className="text-lg font-light"
+        >
+          Discover the art and beauty of bonsai
         </p>
       </div>
     </section>
