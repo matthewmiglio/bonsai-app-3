@@ -35,8 +35,8 @@ export default function Hero() {
       ))}
       <div className="relative z-10 text-center text-white">
         <h1
-          className="text-8xl mb-4 font-normal"
-          style={{ fontFamily: "'Lobster', cursive" }}
+          className="text-8xl mb-4 font-light"
+          style={{ fontFamily: "'Great Vibes', cursive" }}
         >
           Cultivating Tranquility
         </h1>
