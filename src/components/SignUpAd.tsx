@@ -1,7 +1,46 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { Leaf } from "lucide-react";
-import LoginButton from "./LoginButton";
+import BecomeMemberButton from "./BecomeMemberButton";
+import ChatWithMembersButton from "./ChatWithMembersButton";
 
 export default function SignUpAd() {
+  const { data: session } = useSession();
+  const [isMember, setIsMember] = useState(false);
+
+  const checkUserExists = async (email: string): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/emailExistsInSignups", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        console.error("API request failed:", response.status);
+        return false;
+      }
+
+      const data = await response.json();
+      return data.isRegistered === true;
+    } catch (error) {
+      console.error("Error checking user existence:", error);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const check = async () => {
+      if (session?.user?.email) {
+        const exists = await checkUserExists(session.user.email);
+        setIsMember(exists);
+      }
+    };
+    check();
+  }, [session]);
+
   return (
     <div className="pad-10bg-white rounded-lg shadow-md overflow-hidden w-[600px]">
       <div className="p-6 bg-gradient-to-r from-green-700 to-green-800 text-white relative overflow-hidden">
@@ -30,15 +69,13 @@ export default function SignUpAd() {
           Cultivate your skills, root yourself in tradition, and branch out with
           fellow enthusiasts.
         </p>
-        {/* <Link href="/signup">
-          <Button
-            variant="default"
-            className="bg-green-700 hover:bg-green-800 text-white px-8 py-2 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105"
-          >
-            Sign Up Today
-          </Button>
-        </Link> */}
-        <LoginButton showLogout = {false} loginText="Create an Account"/>
+
+        {/* Logic for which button to show */}
+        {!session || (session && !isMember) ? (
+          <BecomeMemberButton />
+        ) : (
+          <ChatWithMembersButton />
+        )}
       </div>
     </div>
   );
