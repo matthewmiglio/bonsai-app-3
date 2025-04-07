@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import LoginButton from "./LoginButton";
+import BecomeMemberButton from "./BecomeMemberButton";
 
 export default function Header() {
   const shopLink = process.env.NEXT_PUBLIC_STORE_LINK || "";
@@ -60,7 +61,7 @@ export default function Header() {
             >
               Contact
             </Link>
-
+            <BecomeMemberButton/>
             <LoginButton />
           </div>
         </div>
