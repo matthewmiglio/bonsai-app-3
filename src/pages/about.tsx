@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/globals.css";
-import LoginButton from "@/components/LoginButton";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import BecomeMemberButton from "../components/BecomeMemberButton";
+import ChatWithMembersButton from "../components/ChatWithMembersButton";
 
 export const metadata: Metadata = {
   title: "About West Michigan Bonsai Club",
@@ -12,6 +15,40 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const { data: session } = useSession();
+  const [isMember, setIsMember] = useState(false);
+
+  const checkUserExists = async (email: string): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/emailExistsInSignups", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        console.error("API request failed:", response.status);
+        return false;
+      }
+
+      const data = await response.json();
+      return data.isRegistered === true;
+    } catch (error) {
+      console.error("Error checking user existence:", error);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const check = async () => {
+      if (session?.user?.email) {
+        const exists = await checkUserExists(session.user.email);
+        setIsMember(exists);
+      }
+    };
+    check();
+  }, [session]);
+
   return (
     <div className="min-h-screen bg-stone-50">
       <Header />
@@ -40,14 +77,16 @@ export default function AboutPage() {
               Welcome to the West Michigan Bonsai Club
             </h2>
             <p className="text-gray-700 mb-4">
-              Welcome to the West Michigan Bonsai Club! We are a vibrant community of bonsai
-              enthusiasts. Dedicated to cultivating a deeper appreciation for bonsai by bringing
-              together individuals passionate about this ancient art form. We invite you to join
-              us on our journey, whether you&apos;re a curious newcomer or a seasoned practitioner.
+              Welcome to the West Michigan Bonsai Club! We are a vibrant
+              community of bonsai enthusiasts. Dedicated to cultivating a deeper
+              appreciation for bonsai by bringing together individuals
+              passionate about this ancient art form. We invite you to join us
+              on our journey, whether you&apos;re a curious newcomer or a
+              seasoned practitioner.
             </p>
             <p className="text-gray-700 text-bold mb-4">
-              Our Mission is to promote the art bonsai through awareness, education and
-              fellowship.
+              Our Mission is to promote the art bonsai through awareness,
+              education and fellowship.
             </p>
           </div>
 
@@ -56,10 +95,11 @@ export default function AboutPage() {
               Our History
             </h2>
             <p className="text-gray-700 mb-4">
-              Founded in 1993 in Holland, Michigan, and then relocated to Grand Rapids in 1995,
-              the West Michigan Bonsai Club has been dedicated to promoting bonsai art across
-              the region. Through our activities, we strive to foster appreciation, knowledge, and
-              a sense of community among bonsai enthusiasts.
+              Founded in 1993 in Holland, Michigan, and then relocated to Grand
+              Rapids in 1995, the West Michigan Bonsai Club has been dedicated
+              to promoting bonsai art across the region. Through our activities,
+              we strive to foster appreciation, knowledge, and a sense of
+              community among bonsai enthusiasts.
             </p>
             <p className="text-gray-700">
               Since our founding, we have continued to expand our reach and
@@ -81,13 +121,15 @@ export default function AboutPage() {
                 Community
               </h3>
               <p className="text-gray-700">
-                The West Michigan Bonsai Club holds monthly meetings from March to December
-                at the Frederick Meijer Gardens and Sculpture Park. Open to both members and
-                the public, these gatherings are an opportunity to enhance your bonsai skills,
-                exchange ideas, and nurture your trees. Our meetings feature educational classes
-                covering beginner bonsai basics, horticulture and techniques to advanced design
-                and display. We also host various special events, including workshops, field trips,
-                and our annual bonsai show and holiday party.
+                The West Michigan Bonsai Club holds monthly meetings from March
+                to December at the Frederick Meijer Gardens and Sculpture Park.
+                Open to both members and the public, these gatherings are an
+                opportunity to enhance your bonsai skills, exchange ideas, and
+                nurture your trees. Our meetings feature educational classes
+                covering beginner bonsai basics, horticulture and techniques to
+                advanced design and display. We also host various special
+                events, including workshops, field trips, and our annual bonsai
+                show and holiday party.
               </p>
             </div>
 
@@ -96,12 +138,14 @@ export default function AboutPage() {
                 Membership
               </h3>
               <p className="text-gray-700">
-                By becoming a member, you support our mission and gain access to a wealth of
-                resources. Our annual dues are $30 for individuals and $40 for families, providing
-                benefits such as entry to meetings and workshops, invitations to garden tours, and
-                a monthly newsletter. We also offer unique programs like the Bonsai Journey,
-                where members transform raw stock into refined bonsai, and hands-on workshops
-                with visiting bonsai professionals.
+                By becoming a member, you support our mission and gain access to
+                a wealth of resources. Our annual dues are $30 for individuals
+                and $40 for families, providing benefits such as entry to
+                meetings and workshops, invitations to garden tours, and a
+                monthly newsletter. We also offer unique programs like the
+                Bonsai Journey, where members transform raw stock into refined
+                bonsai, and hands-on workshops with visiting bonsai
+                professionals.
               </p>
             </div>
 
@@ -110,21 +154,20 @@ export default function AboutPage() {
                 Exhibits
               </h3>
               <p className="text-gray-700">
-                Twice a year, we proudly host public exhibits at Frederik Meijer Gardens and
-                Sculpture Park, showcasing the beauty of bonsai. In the spring we support The
-                Meijer Gardens All-State Bonsai Show. In the fall the West Michigan Bonsai Club
-                Show offers stunning displays, demonstrations, and workshops for all skill levels.
-                Attendees can also explore a marketplace featuring high-quality trees, tools, and
-                more.
-
-                Join us at the West Michigan Bonsai Club, and let&#39;s grow something extraordinary
-                together.
+                Twice a year, we proudly host public exhibits at Frederik Meijer
+                Gardens and Sculpture Park, showcasing the beauty of bonsai. In
+                the spring we support The Meijer Gardens All-State Bonsai Show.
+                In the fall the West Michigan Bonsai Club Show offers stunning
+                displays, demonstrations, and workshops for all skill levels.
+                Attendees can also explore a marketplace featuring high-quality
+                trees, tools, and more. Join us at the West Michigan Bonsai
+                Club, and let&#39;s grow something extraordinary together.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="text-center mb-16">
+        <section className=" justify-items-center text-center mb-16">
           <h2 className="text-2xl font-semibold text-green-700 mb-4">
             Join Our Community
           </h2>
@@ -132,9 +175,12 @@ export default function AboutPage() {
             Whether you&apos;re a seasoned bonsai artist or just starting your
             journey, we welcome you to join our vibrant community.
           </p>
-          <div className="justify-items-center">
-            <LoginButton loginText="Create an Account" />
-          </div>
+          {/* Logic for which button to show */}
+          {!session || (session && !isMember) ? (
+            <BecomeMemberButton />
+          ) : (
+            <ChatWithMembersButton />
+          )}
         </section>
       </main>
       <Footer />
