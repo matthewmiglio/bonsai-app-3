@@ -9,7 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import LoginButton from "@/components/LoginButton";
 import { Send } from "lucide-react";
+import BecomeMemberButton from "@/components/BecomeMemberButton";
 
 // Message type definition
 type Message = {
@@ -26,17 +28,19 @@ export default function MembersPage() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const lastMessageIdRef = useRef<number | null>(null);
   const userScrolledRef = useRef<boolean>(false);
+  const [emailSignedUp, setEmailSignedUp] = useState(false);
 
   // Scroll chat window to bottom when necessary
   const scrollToBottom = () => {
-    const chatContainer = chatContainerRef.current?.querySelector('[data-radix-scroll-area-viewport]');
+    const chatContainer = chatContainerRef.current?.querySelector(
+      "[data-radix-scroll-area-viewport]"
+    );
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     } else {
-      console.log('Tried to scroll to bottom but viewport was not found');
+      console.log("Tried to scroll to bottom but viewport was not found");
     }
   };
-
 
   // Fetch messages from Supabase
   const fetchMessages = async () => {
@@ -54,8 +58,13 @@ export default function MembersPage() {
 
     const lastFetchedId = data[data.length - 1].id;
 
-    if (lastMessageIdRef.current === null || lastFetchedId > lastMessageIdRef.current) {
-      console.log('There is a new most recent message! Should update last message and scroll to bottom');
+    if (
+      lastMessageIdRef.current === null ||
+      lastFetchedId > lastMessageIdRef.current
+    ) {
+      console.log(
+        "There is a new most recent message! Should update last message and scroll to bottom"
+      );
       setMessages(data);
       lastMessageIdRef.current = lastFetchedId;
 
@@ -67,12 +76,11 @@ export default function MembersPage() {
     }
   };
 
-
   const fetchAndScroll = async () => {
-    console.log('Fetching messages then scrolling to bottom')
+    console.log("Fetching messages then scrolling to bottom");
     await fetchMessages();
     scrollToBottom();
-  }
+  };
 
   useEffect(() => {
     fetchAndScroll();
@@ -118,20 +126,23 @@ export default function MembersPage() {
   }, []);
 
   const sendMessage = async (e: React.FormEvent) => {
-    console.log('sending message: ', newMessage);
+    console.log("sending message: ", newMessage);
     e.preventDefault();
     if (!newMessage.trim() || !session?.user?.email) {
-      console.log('pretty sure email is missing so not sending message');
+      console.log("pretty sure email is missing so not sending message");
 
-      return
-    };
+      return;
+    }
 
-    const { data, error } = await supabase.from("messages").insert([
-      {
-        user_email: session.user.email,
-        content: newMessage,
-      },
-    ]).select(); // Ensure we get the inserted message back
+    const { data, error } = await supabase
+      .from("messages")
+      .insert([
+        {
+          user_email: session.user.email,
+          content: newMessage,
+        },
+      ])
+      .select(); // Ensure we get the inserted message back
 
     if (error) {
       console.error("Error sending message:", error);
@@ -139,14 +150,14 @@ export default function MembersPage() {
     }
 
     if (data && data.length > 0) {
-      console.log('Verified this message was properly sent: ', data[0]);
+      console.log("Verified this message was properly sent: ", data[0]);
       setMessages((prev) => [...prev, data[0]]); // Append message immediately
       lastMessageIdRef.current = data[0].id;
 
       // Auto-scroll to bottom after sending a message
-      console.log('Scrolling to bottom after sending message...');
+      console.log("Scrolling to bottom after sending message...");
       scrollToBottom();
-      console.log('Scrolled to bottom after sending message!');
+      console.log("Scrolled to bottom after sending message!");
     }
 
     setNewMessage("");
@@ -167,6 +178,35 @@ export default function MembersPage() {
     }).format(utcDate);
   };
 
+  const checkUserExists = async (email: string): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/emailExistsInSignups", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) return false;
+      const data = await response.json();
+      return data.isRegistered === true;
+    } catch (error) {
+      console.error("Error checking user existence:", error);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const check = async () => {
+      if (session?.user?.email) {
+        const exists = await checkUserExists(session.user.email);
+        setEmailSignedUp(exists);
+      } else {
+        setEmailSignedUp(false);
+      }
+    };
+    check();
+  }, [session]);
+
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
       <Header />
@@ -181,16 +221,41 @@ export default function MembersPage() {
             {session.user?.email})
           </p>
         ) : (
-          <p className="text-center text-red-500 font-bold">
-            Please log in to use the chat.
-          </p>
+          <p className="text-center text-red-500 font-bold"></p>
         )}
 
         <Card className="relative mt-6">
           <CardHeader>
             <CardTitle>Member Chat</CardTitle>
           </CardHeader>
-          <CardContent className={`relative ${!session ? "blur-md" : ""}`}>
+
+          {/*if not logged in + not signed up*/}
+          {(!session && !emailSignedUp) && (
+            <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
+              <div className="justify-items-center text-center space-y-4">
+                <p className="text-gray-700 font-semibold text-lg">
+                  Please log in to chat
+                </p>
+                <LoginButton />
+              </div>
+            </div>
+          )}
+
+          {/*if logged in + not signed up*/}
+          {(session && !emailSignedUp) && (
+            <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
+              <div className="justify-items-center text-center space-y-4">
+                <p className="text-gray-700 font-semibold text-lg">
+                  Please sign up to chat!
+                </p>
+                <BecomeMemberButton />
+              </div>
+            </div>
+          )}
+
+
+
+          <CardContent >
             <ScrollArea
               ref={chatContainerRef}
               className="h-[400px] mb-4 border p-2 rounded overflow-y-auto"
@@ -201,7 +266,9 @@ export default function MembersPage() {
                     <strong>{message.user_email}</strong> -{" "}
                     {formatTimestamp(message.created_at)}
                   </p>
-                  <p className="bg-green-100 p-2 rounded-lg">{message.content}</p>
+                  <p className="bg-green-100 p-2 rounded-lg">
+                    {message.content}
+                  </p>
                 </div>
               ))}
             </ScrollArea>
