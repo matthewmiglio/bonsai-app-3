@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { LogOut, Leaf } from "lucide-react";
+import {  Leaf } from "lucide-react";
 
 interface LoginButtonProps {
   loginText?: string;
