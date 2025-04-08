@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import {  Leaf } from "lucide-react";
+import { Leaf } from "lucide-react";
 
 interface LoginButtonProps {
   loginText?: string;
@@ -27,8 +27,7 @@ export default function LoginButton({
             className="flex items-center gap-1 px-4 py-2 text-black rounded hover:bg-gray-100 border-black border-2"
           >
             <span className="underline">Logout</span>
-            {/* <span className="underline">{session.user?.name}</span> */}
-            </button>
+          </button>
         )
       ) : (
         <button
@@ -37,7 +36,6 @@ export default function LoginButton({
         >
           <Leaf size={20} />
           <span className="px-3 whitespace-nowrap">{loginText}</span>
-
         </button>
       )}
     </div>
