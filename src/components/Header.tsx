@@ -92,8 +92,7 @@ export default function Header() {
                 height={60}
                 className="transition-all duration-300 ease-in-out transform hover:scale-105"
               />
-              <div className = "text-lg  sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl">
-              {/* <div className = "text-xl sm:text-lg"> */}
+              <div className = "text-lg  sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl 2xl:text-4xl">
               West Michigan Bonsai Club
               </div>
             </Link>
