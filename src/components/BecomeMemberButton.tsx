@@ -12,7 +12,7 @@ export default function BecomeMemberButton() {
     <div>
       <button
         onClick={onBecomeMemberClick}
-        className="flex items-center gap-4 px-2 py-2 bg-green-800 text-white rounded hover:bg-green-900"
+        className="flex items-center gap-4 px-2 py-2 bg-green-700 hover:bg-green-900 border-2 border-green-900 text-white rounded "
       >
         <Leaf size={20} />
         <span className="px-3 whitespace-nowrap">Become a Member</span>
