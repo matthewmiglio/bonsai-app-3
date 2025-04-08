@@ -9,14 +9,12 @@ import "../styles/globals.css";
 
 export default function Home() {
   return (
-    <div>
+    <div className = "min-w-full">
       <Header />
       <main>
         <Hero />
         <WhatWereAbout />
-        <div className="py-4 justify-items-center">
           <SignUpAd />
-        </div>
         <div className="justify-items-center px-10"></div>
         <section className="container mx-auto px-4 py-12 justify-items-center">
           <div className="grid md:grid-cols-2 gap-12 items-start">

@@ -76,48 +76,52 @@ export default function Header() {
   );
 
   return (
-    <header className="bg-white shadow-sm">
-      <nav className="px-4 sm:px-6 py-3 max-w-screen-xl">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <Image
-              src="/logo6_black.png"
-              alt="Bonsai App Logo"
-              width={60}
-              height={60}
-              className="transition-all duration-300 ease-in-out transform hover:scale-105"
-            />
+    <header className="bg-white shadow-sm w-full">
+      <nav className="w-full px-4 sm:px-6 py-3">
+        <div className="mx-auto w-full">
+          {/* Top bar with logo + burger */}
+          <div className="flex justify-between items-center w-full">
             <Link
               href="/"
-              className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-800"
+              className="gap-4 flex items-center  whitespace-nowrap  sm:text-2xl md:text-3xl font-semibold text-green-800"
             >
+              <Image
+                src="/logo6_black.png"
+                alt="Bonsai App Logo"
+                width={60}
+                height={60}
+                className="transition-all duration-300 ease-in-out transform hover:scale-105"
+              />
+              <div className = "text-lg  sm:text-xl md:text-xl lg:text-xl xl:text-xl 2xl:text-xl">
+              {/* <div className = "text-xl sm:text-lg"> */}
               West Michigan Bonsai Club
+              </div>
             </Link>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
+
+            {/* Desktop buttons + nav */}
+            <div className="hidden md:flex items-center gap-4">
+              <div className="flex items-center gap-5">{navLinks}</div>
+              {!hideBecomeMember && <BecomeMemberButton />}
+              <LoginButton />
+            </div>
           </div>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex text-xl space-x-4 items-center">
-            {navLinks}
-            {!hideBecomeMember && <BecomeMemberButton />}
-            <LoginButton />
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+          {/* Mobile dropdown */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 flex flex-col space-y-2 text-lg">
+              <div className="flex flex-col gap-1">{navLinks}</div>
+              {!hideBecomeMember && <BecomeMemberButton />}
+              <LoginButton />
+            </div>
+          )}
         </div>
-
-        {/* Mobile dropdown */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-3 flex flex-col space-y-2 text-lg">
-            {navLinks}
-            {!hideBecomeMember && <BecomeMemberButton />}
-            <LoginButton />
-          </div>
-        )}
       </nav>
     </header>
   );

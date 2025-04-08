@@ -32,7 +32,7 @@ export default function CalendarPage() {
                 </h2>
               </div>
               <p className="text-gray-600">
-                Join us every second Saturday of the month for our regular club
+                Join us every third Tuesday of the month for our regular club
                 meetings. Share your bonsai journey and learn from fellow
                 enthusiasts.
               </p>
@@ -45,7 +45,7 @@ export default function CalendarPage() {
                 </h2>
               </div>
               <p className="text-gray-600">
-                Most events start at 10:00 AM and last for about 2-3 hours.
+                Most events start at 7:00 PM and last for about 2-3 hours.
                 Check individual event details for specific timings.
               </p>
             </div>

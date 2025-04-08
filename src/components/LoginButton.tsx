@@ -24,19 +24,20 @@ export default function LoginButton({
         showLogout && (
           <button
             onClick={() => signOut()}
-            className="flex items-center gap-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            className="flex items-center gap-1 px-4 py-2 text-black rounded hover:bg-gray-100 border-black border-2"
           >
-            <LogOut size={20} />
-            Logout
-          </button>
+            <span className="underline">Logout</span>
+            {/* <span className="underline">{session.user?.name}</span> */}
+            </button>
         )
       ) : (
         <button
           onClick={() => signIn("google")}
-          className="flex items-center gap-1 px-4 py-2 bg-green-800 text-white rounded hover:bg-green-900"
+          className="flex items-center gap-1 px-4 py-2 text-black rounded hover:bg-gray-100 border-black border-2"
         >
           <Leaf size={20} />
-          {loginText}
+          <span className="px-3 whitespace-nowrap">{loginText}</span>
+
         </button>
       )}
     </div>

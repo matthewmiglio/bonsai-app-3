@@ -156,8 +156,8 @@ export default function SignUpPage() {
               </div>
 
               {!session && (
-                <div className="absolute inset-0 bg-white bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
-                  <div className="text-center space-y-4">
+                <div className=" absolute inset-0 bg-white bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
+                  <div className="justify-items-center text-center space-y-4">
                     <p className="text-green-900 font-semibold text-lg">
                       Please log in to sign up and become a member
                     </p>
