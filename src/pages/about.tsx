@@ -122,14 +122,15 @@ export default function AboutPage() {
               </h3>
               <p className="text-gray-700">
                 The West Michigan Bonsai Club holds monthly meetings from March
-                to December at the Frederick Meijer Gardens and Sculpture Park.
-                Open to both members and the public, these gatherings are an
-                opportunity to enhance your bonsai skills, exchange ideas, and
-                nurture your trees. Our meetings feature educational classes
-                covering beginner bonsai basics, horticulture and techniques to
-                advanced design and display. We also host various special
-                events, including workshops, field trips, and our annual bonsai
-                show and holiday party.
+                to December at the Frederik Meijer Gardens & Sculpture Park.
+                Open to both members and the public, these gatherings offer
+                opportunities to sharpen your bonsai skills, exchange ideas, and
+                care for your trees. Each meeting features educational classes
+                covering everything from beginner bonsai basics and
+                horticultural techniques to advanced design and display. The
+                club also hosts special events throughout the year, including
+                workshops, field trips, an annual bonsai show, and a holiday
+                party.
               </p>
             </div>
 
@@ -139,13 +140,13 @@ export default function AboutPage() {
               </h3>
               <p className="text-gray-700">
                 By becoming a member, you support our mission and gain access to
-                a wealth of resources. Our annual dues are $30 for individuals
-                and $40 for families, providing benefits such as entry to
+                a wealth of resources. Annual dues are $30 for individuals and
+                $40 for families, and include benefits such as access to
                 meetings and workshops, invitations to garden tours, and a
-                monthly newsletter. We also offer unique programs like the
-                Bonsai Journey, where members transform raw stock into refined
-                bonsai, and hands-on workshops with visiting bonsai
-                professionals.
+                monthly newsletter. Members also enjoy unique programs like The
+                Bonsai Journey, where raw nursery stock is transformed into
+                refined bonsai, as well as hands-on workshops with visiting
+                bonsai artists.
               </p>
             </div>
 
@@ -155,13 +156,14 @@ export default function AboutPage() {
               </h3>
               <p className="text-gray-700">
                 Twice a year, we proudly host public exhibits at Frederik Meijer
-                Gardens and Sculpture Park, showcasing the beauty of bonsai. In
-                the spring we support The Meijer Gardens All-State Bonsai Show.
-                In the fall the West Michigan Bonsai Club Show offers stunning
-                displays, demonstrations, and workshops for all skill levels.
-                Attendees can also explore a marketplace featuring high-quality
-                trees, tools, and more. Join us at the West Michigan Bonsai
-                Club, and let&#39;s grow something extraordinary together.
+                Gardens & Sculpture Park, celebrating the beauty of bonsai. In
+                the spring, we support the Meijer Gardens All-State Bonsai Show.
+                In the fall, the West Michigan Bonsai Club Show features
+                stunning displays, live demonstrations, and workshops for all
+                skill levels. Attendees can also browse a marketplace offering
+                high-quality trees, tools, and more. Join us at the West
+                Michigan Bonsai Club — and let&#39;s grow something
+                extraordinary together.
               </p>
             </div>
           </div>
