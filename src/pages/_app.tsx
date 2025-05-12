@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <RootLayout>
         <Component {...pageProps} />
       </RootLayout>
-      <Analytics /> {/*Standard to put analytics inside app as close to root as possible but within providers*/}
+      <Analytics /> 
     </SessionProvider>
   );
 }
