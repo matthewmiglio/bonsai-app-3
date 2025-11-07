@@ -86,7 +86,7 @@ export default function Header() {
               className="gap-4 flex items-center  whitespace-nowrap  sm:text-2xl md:text-3xl font-semibold text-green-800"
             >
               <Image
-                src="/logo6_black.png"
+                src="/logos/logo6_black.png"
                 alt="Bonsai App Logo"
                 width={60}
                 height={60}

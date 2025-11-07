@@ -42,50 +42,50 @@ const galleryItems: GalleryItem[] = [
   },
 
   {
-    src: "/fb_bonsai_21.jpg",
+    src: "/facebook_images/fb_bonsai_21.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "One of the many beautiful bonsai trees on display at the West Michigan Bonsai Club.",
   },
   {
-    src: "/fb_bonsai_19.jpg",
+    src: "/facebook_images/fb_bonsai_19.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A beautifully cultivated pine bonsai showcasing refined branch structure and dense foliage, a testament to expert styling.",
   },
 
   {
-    src: "/fb_bonsai_27.jpg",
+    src: "/facebook_images/fb_bonsai_27.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A dramatic juniper bonsai with striking deadwood and lush foliage, capturing the essence of aged elegance.",
   },
   {
-    src: "/fb_bonsai_1.jpg",
+    src: "/facebook_images/fb_bonsai_1.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A vibrant bald cypress bonsai displaying strong taper and intricate branch ramification, evoking a swampy forest scene.",
   },
   {
-    src: "/fb_bonsai_4.jpg",
+    src: "/facebook_images/fb_bonsai_4.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A stunning tropical bonsai with a well-balanced canopy, thriving in its handcrafted display pot.",
   },
   {
-    src: "/fb_bonsai_15.jpg",
+    src: "/facebook_images/fb_bonsai_15.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A stunning bonsai with a blend of lush green foliage and a bare branch, symbolizing resilience and growth, displayed against a traditional Japanese-style backdrop.",
   },
   {
-    src: "/fb_bonsai_17.jpg",
+    src: "/facebook_images/fb_bonsai_17.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "This striking bonsai composition integrates natural driftwood and live foliage, creating a stunning contrast between aged wood and fresh growth, symbolizing resilience and harmony in nature.",
   },
   {
-    src: "/87fb729d470d7e194db59e2543d86580-1998567230.jpg",
+    src: "/meijer/87fb729d470d7e194db59e2543d86580-1998567230.jpg",
     alt: "",
     caption:
       "A breathtaking view of Frederik Meijer Gardens, a place where nature and art converge, providing inspiration for bonsai enthusiasts and horticulturalists alike.",
@@ -97,99 +97,99 @@ const galleryItems: GalleryItem[] = [
       "A powerful pine bonsai with a majestic silhouette, styled to reflect the rugged landscapes of nature.",
   },
   {
-    src: "/fb_bonsai_12.jpg",
+    src: "/facebook_images/fb_bonsai_12.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A kusamono accent plant, complementing bonsai with its delicate leaves and vibrant greenery.",
   },
 
   {
-    src: "/fb_bonsai_3.jpg",
+    src: "/facebook_images/fb_bonsai_3.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A flowering bonsai in full bloom, highlighting the seasonal beauty that adds charm to any collection.",
   },
   {
-    src: "/fb_bonsai_6.jpg",
+    src: "/facebook_images/fb_bonsai_6.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A compact yet well-structured black pine bonsai, demonstrating refined needle management and artistic form.",
   },
   {
-    src: "/fb_bonsai_7.jpg",
+    src: "/facebook_images/fb_bonsai_7.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A stunning Japanese maple bonsai, its fiery autumn foliage creating a breathtaking seasonal display.",
   },
   {
-    src: "/fb_bonsai_8.jpg",
+    src: "/facebook_images/fb_bonsai_8.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A windswept-style bonsai with graceful movement, embodying the resilience of trees against harsh elements.",
   },
 
   {
-    src: "/fb_bonsai_9.jpg",
+    src: "/facebook_images/fb_bonsai_9.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A gracefully curved juniper bonsai, expertly trained with a delicate balance of foliage and exposed trunk, embodying the essence of natural beauty.",
   },
   {
-    src: "/fb_bonsai_10.jpg",
+    src: "/facebook_images/fb_bonsai_10.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A well-balanced black pine bonsai, meticulously shaped with strong, radiating branches, showcased in an elegant setting with a shoji screen background.",
   },
   {
-    src: "/fb_bonsai_11.jpg",
+    src: "/facebook_images/fb_bonsai_11.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A meticulously styled bonsai with dense foliage and an elegant trunk structure, showcasing the artistry and patience required to achieve a well-balanced canopy.",
   },
   {
-    src: "/fb_bonsai_14.jpg",
+    src: "/facebook_images/fb_bonsai_14.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A captivating bonsai displayed in a deep blue ceramic pot, skillfully styled with exposed roots gripping a rugged stone, evoking a sense of age and natural beauty.",
   },
   {
-    src: "/fb_bonsai_16.jpg",
+    src: "/facebook_images/fb_bonsai_16.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "This bonsai showcases exceptional branch structure and dense, vibrant foliage, creating a well-balanced and mature appearance that highlights expert pruning and styling.",
   },
   {
-    src: "/fb_bonsai_20.jpg",
+    src: "/facebook_images/fb_bonsai_20.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A full and dense bonsai with expertly pruned foliage, capturing the essence of a miniature, ancient forest standing in perfect harmony.",
   },
   {
-    src: "/fb_bonsai_23.jpg",
+    src: "/facebook_images/fb_bonsai_23.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A rugged and dramatic bonsai with wild, twisting branches and intricate deadwood, embodying the raw power of nature's artistry.",
   },
   {
-    src: "/fb_bonsai_24.jpg",
+    src: "/facebook_images/fb_bonsai_24.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A striking bonsai with a vivid contrast between its bright green foliage and bleached deadwood, emphasizing the beauty of time and weathering.",
   },
   {
-    src: "/fb_bonsai_26.jpg",
+    src: "/facebook_images/fb_bonsai_26.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "An impressive tiered bonsai, evoking the image of an ancient pine tree in nature, beautifully illuminated against a deep, dramatic backdrop.",
   },
   {
-    src: "/fb_bonsai_28.jpg",
+    src: "/facebook_images/fb_bonsai_28.jpg",
     alt: "Facebook Bonsai #21",
     caption:
       "A breathtakingly aged bonsai with intricate deadwood carving, a dense canopy, and a commanding presence, highlighting the mastery of bonsai cultivation.",
   },
   {
-    src: "/fb_bonsai_13.jpg",
+    src: "/facebook_images/fb_bonsai_13.jpg",
     alt: "Facebook Bonsai #21",
     caption: "Tara Rietberg's amazing Juniper procumbens bonsai.",
   },
@@ -211,7 +211,7 @@ export default function GalleryPage() {
                 onClick={() => setSelectedImage(item)}
               >
                 <Image
-                  src={item.src || "/ai_bonsai_1.jpeg"}
+                  src={item.src || "/ai/ai_bonsai_1.jpeg"}
                   alt={item.alt}
                   width={800}
                   height={600}
@@ -235,7 +235,7 @@ export default function GalleryPage() {
             {selectedImage && (
               <>
                 <Image
-                  src={selectedImage.src || "/ai_bonsai_1.jpeg"}
+                  src={selectedImage.src || "/ai/ai_bonsai_1.jpeg"}
                   alt={selectedImage.alt}
                   width={1200}
                   height={900}
