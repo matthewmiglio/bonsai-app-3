@@ -29,7 +29,6 @@ export default function SignUpPage() {
     e.preventDefault();
 
     let emailSuccess = false;
-    let tableSuccess = false;
 
     try {
       const response = await fetch("/api/email", {
@@ -43,36 +42,18 @@ export default function SignUpPage() {
       // Error sending email
     }
 
-    try {
-      const response = await fetch("/api/addToSignUpTable", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
-      });
-
-      if (response.ok) tableSuccess = true;
-    } catch {
-      // Error adding user
-    }
-
-    let message = "";
-    if (!emailSuccess && !tableSuccess) {
-      message = "Failed to register. Both email and data submission failed.";
-    } else if (!emailSuccess) {
-      message = "User added successfully, but email could not be sent.";
-    } else if (!tableSuccess) {
-      message =
-        "Email sent successfully, but user could not be added to the database.";
-    } else {
-      message = "Registration successful!";
-    }
+    const message = emailSuccess
+      ? "Thank you for your interest! We've received your information and will be in touch soon."
+      : "Failed to submit your information. Please try again or contact us directly.";
 
     setModalMessage(message);
     setIsModalOpen(true);
 
-    if (message === "Registration successful!") {
-      //redirect to members page
-      window.location.href = "/members";
+    if (emailSuccess) {
+      // Redirect to members page after successful submission
+      setTimeout(() => {
+        window.location.href = "/members";
+      }, 2000);
     }
   };
 
