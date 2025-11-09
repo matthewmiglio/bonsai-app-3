@@ -1,14 +1,23 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function WhatWereAbout() {
   return (
-    <section className="py-16 bg-white">
+    <section className="pt-16 pb-8 bg-white">
       <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl font-semibold text-center mb-8 text-green-800">
+        <h2 className="text-4xl font-semibold text-center mb-8 text-green-800">
           What We&apos;re About
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           <div className="bg-stone-100 p-6 rounded-lg">
+            <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+              <Image
+                src="/facebook_images/fb_bonsai_15.jpg"
+                alt="Community"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
             <div className="py-1">
               <Link
                 href="/members"
@@ -24,6 +33,14 @@ export default function WhatWereAbout() {
             </p>
           </div>
           <div className="bg-stone-100 p-6 rounded-lg">
+            <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+              <Image
+                src="/facebook_images/fb_bonsai_8.jpg"
+                alt="Workshops & Events"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
             <div className="py-1">
               <Link
                 href="/calendar"
@@ -38,6 +55,14 @@ export default function WhatWereAbout() {
             </p>
           </div>
           <div className="bg-stone-100 p-6 rounded-lg">
+            <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+              <Image
+                src="/facebook_images/fb_bonsai_3.jpg"
+                alt="Passion for Bonsai"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
             <div className="py-1">
               <Link
                 href="/about"

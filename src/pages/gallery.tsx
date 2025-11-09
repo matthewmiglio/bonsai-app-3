@@ -5,6 +5,8 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import GalleryHeroCandidate3 from "../components/GalleryHeroCandidate3";
+import ContactCTA3 from "../components/ContactCTA3";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import "../styles/globals.css";
@@ -201,6 +203,10 @@ export default function GalleryPage() {
   return (
     <div className="min-h-screen bg-stone-50">
       <Header />
+
+      {/* Hero */}
+      <GalleryHeroCandidate3 />
+
       <main className="container mx-auto px-4 py-8">
         {/* <h1 className="text-4xl font-bold text-green-800 italic mb-8 text-center">Community Gallery</h1> */}
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
@@ -223,6 +229,11 @@ export default function GalleryPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-16">
+          <ContactCTA3 />
         </div>
       </main>
       <Footer />

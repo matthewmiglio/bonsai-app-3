@@ -1,27 +1,42 @@
 import Header from "../components/Header";
-import Hero from "../components/Hero";
+import HomeHeroCandidate1 from "../components/HomeHeroCandidate1";
 import WhatWereAbout from "../components/WhatWereAbout";
 import FacebookFeed from "../components/Facebook";
 import Footer from "../components/Footer";
 import Gallery from "../components/GalleryComponent";
-import SignUpAd from "../components/SignUpAd";
+import SignUpAdCandidate2 from "../components/SignUpAdCandidate2";
+import MemberSpotlight from "../components/MemberSpotlight";
+import UpcomingEvents from "../components/UpcomingEvents";
 import "../styles/globals.css";
 
 export default function Home() {
   return (
-    <div className = "min-w-full">
+    <div className="min-w-full">
       <Header />
       <main>
-        <Hero />
+        {/* Hero */}
+        <HomeHeroCandidate1 />
+
+        {/* What We're About */}
         <WhatWereAbout />
-          <SignUpAd />
-        <div className="justify-items-center px-10"></div>
-        <section className="container mx-auto px-4 py-12 justify-items-center">
+
+        {/* Member Spotlight */}
+        <MemberSpotlight />
+
+
+        {/* Original Gallery and Facebook Feed */}
+        <section className="container mx-auto px-4 py-12 bg-white max-w-4xl">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <Gallery />
             <FacebookFeed />
           </div>
         </section>
+
+        {/* Upcoming Events with glass cards */}
+        <UpcomingEvents />
+
+        {/* Sign Up CTA */}
+        <SignUpAdCandidate2 />
       </main>
       <Footer />
     </div>

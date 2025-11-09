@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Leaf } from "lucide-react";
+import { User } from "lucide-react";
 
 interface LoginButtonProps {
   loginText?: string;
@@ -34,7 +34,7 @@ export default function LoginButton({
           onClick={() => signIn("google")}
           className="flex items-center gap-1 px-4 py-2 text-black rounded hover:bg-gray-100 border-black border-2"
         >
-          <Leaf size={20} />
+          <User size={20} />
           <span className="px-3 whitespace-nowrap">{loginText}</span>
         </button>
       )}

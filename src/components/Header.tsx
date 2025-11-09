@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import LoginButton from "./LoginButton";
 import BecomeMemberButton from "./BecomeMemberButton";
 import { useSession } from "next-auth/react";
@@ -10,6 +11,7 @@ import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const [hideBecomeMember, setHideBecomeMember] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -46,37 +48,67 @@ export default function Header() {
 
   const navLinks = (
     <>
-      <Link href="/" className="text-gray-600 hover:text-green-800">
+      <Link
+        href="/"
+        className={pathname === "/"
+          ? "text-green-600 font-bold text-[1.05rem] hover:text-green-800"
+          : "text-gray-600 font-semibold hover:text-green-800"}
+      >
         Home
       </Link>
-      <Link href="/gallery" className="text-gray-600 hover:text-green-800">
+      <Link
+        href="/gallery"
+        className={pathname === "/gallery"
+          ? "text-green-600 font-bold text-[1.05rem] hover:text-green-800"
+          : "text-gray-600 font-semibold hover:text-green-800"}
+      >
         Gallery
       </Link>
       <Link
         href={shopLink}
-        className="text-gray-600 hover:text-green-800"
+        className="text-gray-600 font-semibold hover:text-green-800"
         target="_blank"
         rel="noopener noreferrer"
       >
         Shop
       </Link>
-      <Link href="/calendar" className="text-gray-600 hover:text-green-800">
+      <Link
+        href="/calendar"
+        className={pathname === "/calendar"
+          ? "text-green-600 font-bold text-[1.05rem] hover:text-green-800"
+          : "text-gray-600 font-semibold hover:text-green-800"}
+      >
         Calendar
       </Link>
-      <Link href="/members" className="text-gray-600 hover:text-green-800">
-        Members
+      <Link
+        href="/members"
+        className={pathname === "/members"
+          ? "text-green-600 font-bold text-[1.05rem] hover:text-green-800"
+          : "text-gray-600 font-semibold hover:text-green-800"}
+      >
+        Chat
       </Link>
-      <Link href="/about" className="text-gray-600 hover:text-green-800">
+      <Link
+        href="/about"
+        className={pathname === "/about"
+          ? "text-green-600 font-bold text-[1.05rem] hover:text-green-800"
+          : "text-gray-600 font-semibold hover:text-green-800"}
+      >
         About
       </Link>
-      <Link href="/contact" className="text-gray-600 hover:text-green-800">
+      <Link
+        href="/contact"
+        className={pathname === "/contact"
+          ? "text-green-600 font-bold text-[1.05rem] hover:text-green-800"
+          : "text-gray-600 font-semibold hover:text-green-800"}
+      >
         Contact
       </Link>
     </>
   );
 
   return (
-    <header className="bg-white shadow-sm w-full">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm w-full">
       <nav className="w-full px-4 sm:px-6 py-3">
         <div className="mx-auto w-full">
           {/* Top bar with logo + burger */}
@@ -86,7 +118,7 @@ export default function Header() {
               className="gap-4 flex items-center  whitespace-nowrap  sm:text-2xl md:text-3xl font-semibold text-green-800"
             >
               <Image
-                src="/logos/logo6_black.png"
+                src="/logos/logo_ai.png"
                 alt="Bonsai App Logo"
                 width={60}
                 height={60}
