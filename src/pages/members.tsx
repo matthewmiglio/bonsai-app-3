@@ -30,6 +30,10 @@ export default function MembersPage() {
   const userScrolledRef = useRef<boolean>(false);
   const [emailSignedUp, setEmailSignedUp] = useState(false);
 
+  console.log("🔍 [MembersPage] Component rendered");
+  console.log("🔍 [MembersPage] session:", session);
+  console.log("🔍 [MembersPage] emailSignedUp:", emailSignedUp);
+
   // Scroll chat window to bottom when necessary
   const scrollToBottom = () => {
     const chatContainer = chatContainerRef.current?.querySelector(
@@ -180,27 +184,42 @@ export default function MembersPage() {
 
   const checkUserExists = async (email: string): Promise<boolean> => {
     try {
+      console.log("🔍 [checkUserExists] Checking if email exists:", email);
       const response = await fetch("/api/emailExistsInSignups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      if (!response.ok) return false;
+      console.log("🔍 [checkUserExists] Response status:", response.status);
+      if (!response.ok) {
+        console.log("🔍 [checkUserExists] Response not OK, returning false");
+        return false;
+      }
       const data = await response.json();
+      console.log("🔍 [checkUserExists] Response data:", data);
+      console.log("🔍 [checkUserExists] isRegistered:", data.isRegistered);
       return data.isRegistered === true;
     } catch (error) {
-      console.error("Error checking user existence:", error);
+      console.error("❌ [checkUserExists] Error checking user existence:", error);
       return false;
     }
   };
 
   useEffect(() => {
     const check = async () => {
+      console.log("🔍 [useEffect-checkUser] Running check...");
+      console.log("🔍 [useEffect-checkUser] session:", session);
+      console.log("🔍 [useEffect-checkUser] session?.user?.email:", session?.user?.email);
+
       if (session?.user?.email) {
+        console.log("🔍 [useEffect-checkUser] Session and email found, checking if user exists");
         const exists = await checkUserExists(session.user.email);
+        console.log("🔍 [useEffect-checkUser] User exists result:", exists);
         setEmailSignedUp(exists);
+        console.log("🔍 [useEffect-checkUser] Set emailSignedUp to:", exists);
       } else {
+        console.log("🔍 [useEffect-checkUser] No session or email, setting emailSignedUp to false");
         setEmailSignedUp(false);
       }
     };
@@ -230,28 +249,42 @@ export default function MembersPage() {
           </CardHeader>
 
           {/*if not logged in + not signed up*/}
-          {(!session && !emailSignedUp) && (
-            <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
-              <div className="justify-items-center text-center space-y-4">
-                <p className="text-gray-700 font-semibold text-lg">
-                  Please log in to chat
-                </p>
-                <LoginButton />
+          {(() => {
+            const shouldShowLoginGate = !session && !emailSignedUp;
+            console.log("🔍 [Render-LoginGate] Checking conditions:");
+            console.log("🔍 [Render-LoginGate] !session:", !session);
+            console.log("🔍 [Render-LoginGate] !emailSignedUp:", !emailSignedUp);
+            console.log("🔍 [Render-LoginGate] shouldShowLoginGate:", shouldShowLoginGate);
+            return shouldShowLoginGate ? (
+              <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
+                <div className="justify-items-center text-center space-y-4">
+                  <p className="text-gray-700 font-semibold text-lg">
+                    Please log in to chat
+                  </p>
+                  <LoginButton />
+                </div>
               </div>
-            </div>
-          )}
+            ) : null;
+          })()}
 
           {/*if logged in + not signed up*/}
-          {(session && !emailSignedUp) && (
-            <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
-              <div className="justify-items-center text-center space-y-4">
-                <p className="text-gray-700 font-semibold text-lg">
-                  Please sign up to chat!
-                </p>
-                <BecomeMemberButton />
+          {(() => {
+            const shouldShowSignupGate = session && !emailSignedUp;
+            console.log("🔍 [Render-SignupGate] Checking conditions:");
+            console.log("🔍 [Render-SignupGate] session:", !!session);
+            console.log("🔍 [Render-SignupGate] !emailSignedUp:", !emailSignedUp);
+            console.log("🔍 [Render-SignupGate] shouldShowSignupGate:", shouldShowSignupGate);
+            return shouldShowSignupGate ? (
+              <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
+                <div className="justify-items-center text-center space-y-4">
+                  <p className="text-gray-700 font-semibold text-lg">
+                    Please sign up to chat!
+                  </p>
+                  <BecomeMemberButton />
+                </div>
               </div>
-            </div>
-          )}
+            ) : null;
+          })()}
 
 
 
