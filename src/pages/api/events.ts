@@ -12,11 +12,7 @@ interface Event {
 const API_KEY = process.env.GOOGLE_CALENDAR_API_KEY;
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID;
 
-console.log('events.ts api key is ', API_KEY);
-console.log('events.ts calendar id is ', CALENDAR_ID);
-
 const fetchEventsFromAPI = async (): Promise<Event[]> => {
-  console.log("Fetching events from Google Calendar API...");
 
   const res = await fetch(
     `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`,
@@ -37,7 +33,6 @@ const fetchEventsFromAPI = async (): Promise<Event[]> => {
     htmlLink: event.htmlLink,
   }));
 
-  console.log("Processed events data:", events);
   return events;
 };
 

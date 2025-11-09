@@ -21,35 +21,35 @@ export default function ContactPage() {
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto space-y-12">
           {/* Contact Info and Social Media Cards (Original) */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-semibold text-green-700 mb-6">
+          <div className="grid md:grid-cols-2 gap-6 w-full">
+            <Card className="bg-white shadow-lg w-full">
+              <CardContent className="p-4 md:p-6">
+                <h2 className="text-xl md:text-2xl font-semibold text-green-700 mb-4 md:mb-6">
                   Contact Information
                 </h2>
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-green-100 p-3 rounded-full">
-                      <Mail className="h-6 w-6 text-green-700" />
+                <div className="space-y-4 md:space-y-6">
+                  <div className="flex items-start space-x-3 md:space-x-4">
+                    <div className="bg-green-100 p-2 md:p-3 rounded-full flex-shrink-0">
+                      <Mail className="h-5 w-5 md:h-6 md:w-6 text-green-700" />
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Email</h3>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Email</h3>
                       <a
                         href="mailto:matmigg0804@gmail.com"
-                        className="text-gray-600 hover:text-green-700 transition-colors"
+                        className="text-gray-600 hover:text-green-700 transition-colors text-sm md:text-base break-words"
                       >
                         info@wmbonsai.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-green-100 p-3 rounded-full">
-                      <MapPin className="h-6 w-6 text-green-700" />
+                  <div className="flex items-start space-x-3 md:space-x-4">
+                    <div className="bg-green-100 p-2 md:p-3 rounded-full flex-shrink-0">
+                      <MapPin className="h-5 w-5 md:h-6 md:w-6 text-green-700" />
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Location</h3>
-                      <p className="text-gray-600">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Location</h3>
+                      <p className="text-gray-600 text-sm md:text-base break-words">
                         West Michigan - Frederik Meijer Gardens
                       </p>
                     </div>
@@ -58,38 +58,38 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-semibold text-green-700 mb-6">
+            <Card className="bg-white shadow-lg w-full">
+              <CardContent className="p-4 md:p-6">
+                <h2 className="text-xl md:text-2xl font-semibold text-green-700 mb-4 md:mb-6">
                   Connect With Us
                 </h2>
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-blue-100 p-3 rounded-full">
-                      <Facebook className="h-6 w-6 text-blue-600" />
+                <div className="space-y-4 md:space-y-6">
+                  <div className="flex items-start space-x-3 md:space-x-4">
+                    <div className="bg-blue-100 p-2 md:p-3 rounded-full flex-shrink-0">
+                      <Facebook className="h-5 w-5 md:h-6 md:w-6 text-blue-600" />
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Facebook</h3>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Facebook</h3>
                       <Link
                         href="https://www.facebook.com/West.Michigan.Bonsai.Club"
                         target="_blank"
-                        className="text-gray-600 hover:text-blue-600 transition-colors"
+                        className="text-gray-600 hover:text-blue-600 transition-colors text-sm md:text-base break-words"
                       >
                         West Michigan Bonsai Club
                       </Link>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-pink-100 p-3 rounded-full">
-                      <Instagram className="h-6 w-6 text-pink-600" />
+                  <div className="flex items-start space-x-3 md:space-x-4">
+                    <div className="bg-pink-100 p-2 md:p-3 rounded-full flex-shrink-0">
+                      <Instagram className="h-5 w-5 md:h-6 md:w-6 text-pink-600" />
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Instagram</h3>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Instagram</h3>
                       <Link
                         href="https://www.instagram.com/westmichiganbonsaiclub/"
                         target="_blank"
-                        className="text-gray-600 hover:text-pink-600 transition-colors"
+                        className="text-gray-600 hover:text-pink-600 transition-colors text-sm md:text-base break-words"
                       >
                         @westmichiganbonsaiclub
                       </Link>

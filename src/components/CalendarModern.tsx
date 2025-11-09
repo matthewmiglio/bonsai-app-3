@@ -106,10 +106,10 @@ const CalendarModern = () => {
       </div>
 
       {/* Calendar Grid */}
-      <div className="p-6">
-        <div className="grid grid-cols-7 gap-3">
+      <div className="p-3 md:p-6">
+        <div className="grid grid-cols-7 gap-1 md:gap-3">
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
-            <div key={day} className="text-center font-bold text-gray-600 text-sm py-2">
+            <div key={day} className="text-center font-bold text-gray-600 text-xs md:text-sm py-1 md:py-2">
               {day}
             </div>
           ))}
@@ -130,24 +130,24 @@ const CalendarModern = () => {
             return (
               <div
                 key={index}
-                className={`aspect-square rounded-xl flex flex-col items-center justify-center p-2 transition-all hover:shadow-md min-h-[100px] ${
+                className={`aspect-square rounded-lg md:rounded-xl flex flex-col items-center justify-center p-1 md:p-2 transition-all hover:shadow-md ${
                   isToday(day)
-                    ? "bg-green-600 text-white ring-4 ring-green-200"
+                    ? "bg-green-600 text-white ring-2 md:ring-4 ring-green-200"
                     : event
                     ? "bg-green-100 hover:bg-green-200"
                     : "bg-gray-50 hover:bg-gray-100"
                 }`}
               >
-                <span className={`text-lg font-semibold ${isToday(day) ? "text-white" : "text-gray-800"}`}>
+                <span className={`text-sm md:text-lg font-semibold ${isToday(day) ? "text-white" : "text-gray-800"}`}>
                   {day}
                 </span>
-                <div className="h-8 mt-1 flex items-center">
+                <div className="h-4 md:h-8 mt-0.5 md:mt-1 flex items-center w-full px-0.5">
                   {event && (
                     <a
                       href={event.htmlLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`text-xs text-center line-clamp-2 ${
+                      className={`text-[0.5rem] md:text-xs text-center line-clamp-2 w-full ${
                         isToday(day) ? "text-white" : "text-green-700"
                       }`}
                     >

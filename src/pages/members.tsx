@@ -28,9 +28,6 @@ export default function MembersPage() {
   const lastMessageIdRef = useRef<number | null>(null);
   const userScrolledRef = useRef<boolean>(false);
 
-  console.log("🔍 [MembersPage] Component rendered");
-  console.log("🔍 [MembersPage] session:", session);
-
   // Scroll chat window to bottom when necessary
   const scrollToBottom = () => {
     const chatContainer = chatContainerRef.current?.querySelector(
@@ -38,8 +35,6 @@ export default function MembersPage() {
     );
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
-    } else {
-      console.log("Tried to scroll to bottom but viewport was not found");
     }
   };
 
@@ -63,9 +58,6 @@ export default function MembersPage() {
       lastMessageIdRef.current === null ||
       lastFetchedId > lastMessageIdRef.current
     ) {
-      console.log(
-        "There is a new most recent message! Should update last message and scroll to bottom"
-      );
       setMessages(data);
       lastMessageIdRef.current = lastFetchedId;
 
@@ -78,7 +70,6 @@ export default function MembersPage() {
   };
 
   const fetchAndScroll = async () => {
-    console.log("Fetching messages then scrolling to bottom");
     await fetchMessages();
     scrollToBottom();
   };
@@ -127,11 +118,8 @@ export default function MembersPage() {
   }, []);
 
   const sendMessage = async (e: React.FormEvent) => {
-    console.log("sending message: ", newMessage);
     e.preventDefault();
     if (!newMessage.trim() || !session?.user?.email) {
-      console.log("pretty sure email is missing so not sending message");
-
       return;
     }
 
@@ -151,14 +139,11 @@ export default function MembersPage() {
     }
 
     if (data && data.length > 0) {
-      console.log("Verified this message was properly sent: ", data[0]);
       setMessages((prev) => [...prev, data[0]]); // Append message immediately
       lastMessageIdRef.current = data[0].id;
 
       // Auto-scroll to bottom after sending a message
-      console.log("Scrolling to bottom after sending message...");
       scrollToBottom();
-      console.log("Scrolled to bottom after sending message!");
     }
 
     setNewMessage("");
@@ -181,8 +166,6 @@ export default function MembersPage() {
 
   const ensureUserInSignups = async (email: string, name?: string | null) => {
     try {
-      console.log("🔍 [ensureUserInSignups] Checking if email exists:", email);
-
       // Check if user exists
       const checkResponse = await fetch("/api/emailExistsInSignups", {
         method: "POST",
@@ -190,26 +173,20 @@ export default function MembersPage() {
         body: JSON.stringify({ email }),
       });
 
-      console.log("🔍 [ensureUserInSignups] Check response status:", checkResponse.status);
-
       if (!checkResponse.ok) {
-        console.log("🔍 [ensureUserInSignups] Check request failed");
         return;
       }
 
       const checkData = await checkResponse.json();
-      console.log("🔍 [ensureUserInSignups] Check response data:", checkData);
 
       // If user doesn't exist, add them
       if (!checkData.isRegistered) {
-        console.log("🔍 [ensureUserInSignups] User not in SIGNUPs table, adding retroactively...");
-
         // Parse name into first and last name
         const nameParts = name?.split(" ") || [];
         const fname = nameParts[0] || "";
         const lname = nameParts.slice(1).join(" ") || "";
 
-        const addResponse = await fetch("/api/addToSignUpTable", {
+        await fetch("/api/addToSignUpTable", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -219,27 +196,15 @@ export default function MembersPage() {
             phone: "" // No phone number from OAuth login
           }),
         });
-
-        if (addResponse.ok) {
-          console.log("✅ [ensureUserInSignups] User successfully added to SIGNUPs table");
-        } else {
-          console.error("❌ [ensureUserInSignups] Failed to add user to SIGNUPs table");
-        }
-      } else {
-        console.log("✅ [ensureUserInSignups] User already exists in SIGNUPs table");
       }
     } catch (error) {
-      console.error("❌ [ensureUserInSignups] Error:", error);
+      console.error("Error in ensureUserInSignups:", error);
     }
   };
 
   useEffect(() => {
     const check = async () => {
-      console.log("🔍 [useEffect-ensureUser] Running check...");
-      console.log("🔍 [useEffect-ensureUser] session:", session);
-
       if (session?.user?.email) {
-        console.log("🔍 [useEffect-ensureUser] Session found, ensuring user is in SIGNUPs table");
         await ensureUserInSignups(session.user.email, session.user.name);
       }
     };

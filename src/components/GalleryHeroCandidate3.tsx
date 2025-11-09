@@ -32,7 +32,7 @@ export default function GalleryHeroCandidate3() {
         </div>
 
         {/* Image Side */}
-        <div className="relative min-h-[400px] md:min-h-full">
+        <div className="relative min-h-[400px] md:min-h-full hidden md:block">
           <Image
             src="/facebook_images/fb_bonsai_28.jpg"
             alt="Featured Bonsai"

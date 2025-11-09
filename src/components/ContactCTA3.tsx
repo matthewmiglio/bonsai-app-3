@@ -6,7 +6,7 @@ export default function ContactCTA3() {
     <section className="py-16 px-4 bg-white">
       <div className="container mx-auto max-w-6xl">
         <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-          <div className="relative h-[400px]">
+          <div className="relative h-[700px] md:h-[550px]">
             <Image
               src="/facebook_images/fb_bonsai_15.jpg"
               alt="Bonsai background"
@@ -15,8 +15,8 @@ export default function ContactCTA3() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/40"></div>
           </div>
-          <div className="absolute inset-0 flex items-center">
-            <div className="max-w-2xl px-8 md:px-12">
+          <div className="absolute inset-0 flex items-center p-6">
+            <div className="max-w-2xl px-2 md:px-4">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
                 Want to Learn More?
               </h2>

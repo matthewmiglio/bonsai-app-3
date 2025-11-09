@@ -12,14 +12,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { email } = req.body;
 
-  console.log("emailExistsInSignups() received email:", email);
-
   if (!email) {
     return res.status(400).json({ message: "Email is required" });
   }
 
   try {
-    console.log("Checking if email exists in SIGNUPs:", email);
 
     const { data, error } = await supabase
       .from("SIGNUPs")

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Facebook } from "lucide-react";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 declare global {
   interface Window {
@@ -10,6 +10,18 @@ declare global {
 
 const FacebookFeed: React.FC = () => {
   const fbPageRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!document.getElementById("fb-root")) {
@@ -19,7 +31,6 @@ const FacebookFeed: React.FC = () => {
     }
 
     if (!window.FB) {
-      console.log("Loading Facebook SDK...");
       const script = document.createElement("script");
       script.src =
         "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0&appId=1980405622369674";
@@ -27,14 +38,12 @@ const FacebookFeed: React.FC = () => {
       script.defer = true;
       script.crossOrigin = "anonymous";
       script.onload = () => {
-        console.log("Facebook SDK loaded");
         if (window.FB) {
           window.FB.XFBML.parse();
         }
       };
       document.body.appendChild(script);
     } else {
-      console.log("Re-parsing Facebook widgets");
       window.FB.XFBML.parse();
     }
   }, []);
@@ -58,7 +67,7 @@ const FacebookFeed: React.FC = () => {
           className="fb-page"
           data-href="https://www.facebook.com/West.Michigan.Bonsai.Club/"
           data-tabs="timeline"
-          data-width="500"
+          data-width={isMobile ? "400" : "500"}
           data-height="500"
           data-small-header="false"
           data-adapt-container-width="true"
