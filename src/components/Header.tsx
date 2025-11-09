@@ -1,50 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import LoginButton from "./LoginButton";
 import BecomeMemberButton from "./BecomeMemberButton";
-import { useSession } from "next-auth/react";
 import { Menu, X } from "lucide-react";
 
 export default function Header() {
-  const { data: session } = useSession();
   const pathname = usePathname();
-  const [hideBecomeMember, setHideBecomeMember] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const shopLink = process.env.NEXT_PUBLIC_STORE_LINK || "";
-
-  const checkUserExists = async (email: string): Promise<boolean> => {
-    try {
-      const response = await fetch("/api/emailExistsInSignups", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) return false;
-      const data = await response.json();
-      return data.isRegistered === true;
-    } catch (error) {
-      console.error("Error checking user existence:", error);
-      return false;
-    }
-  };
-
-  useEffect(() => {
-    const check = async () => {
-      if (session?.user?.email) {
-        const exists = await checkUserExists(session.user.email);
-        setHideBecomeMember(exists);
-      } else {
-        setHideBecomeMember(false);
-      }
-    };
-    check();
-  }, [session]);
 
   const navLinks = (
     <>
@@ -143,7 +111,7 @@ export default function Header() {
             <div className="hidden md:flex items-center gap-4 ml-auto">
               <div className="flex items-center gap-5">{navLinks}</div>
               <div className="flex items-center gap-2 ml-4">
-                {!hideBecomeMember && <BecomeMemberButton />}
+                <BecomeMemberButton />
                 <LoginButton />
               </div>
             </div>
@@ -154,7 +122,7 @@ export default function Header() {
             <div className="md:hidden mt-4 flex flex-col items-center space-y-3 text-xl">
               <div className="flex flex-col gap-3 items-center w-full">{navLinks}</div>
               <div className="flex flex-col gap-3 items-center w-full mt-4">
-                {!hideBecomeMember && <BecomeMemberButton />}
+                <BecomeMemberButton />
                 <LoginButton />
               </div>
             </div>
