@@ -11,7 +11,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import LoginButton from "@/components/LoginButton";
 import { Send } from "lucide-react";
-import BecomeMemberButton from "@/components/BecomeMemberButton";
 
 // Message type definition
 type Message = {
@@ -28,11 +27,9 @@ export default function MembersPage() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const lastMessageIdRef = useRef<number | null>(null);
   const userScrolledRef = useRef<boolean>(false);
-  const [emailSignedUp, setEmailSignedUp] = useState(false);
 
   console.log("🔍 [MembersPage] Component rendered");
   console.log("🔍 [MembersPage] session:", session);
-  console.log("🔍 [MembersPage] emailSignedUp:", emailSignedUp);
 
   // Scroll chat window to bottom when necessary
   const scrollToBottom = () => {
@@ -182,45 +179,68 @@ export default function MembersPage() {
     }).format(utcDate);
   };
 
-  const checkUserExists = async (email: string): Promise<boolean> => {
+  const ensureUserInSignups = async (email: string, name?: string | null) => {
     try {
-      console.log("🔍 [checkUserExists] Checking if email exists:", email);
-      const response = await fetch("/api/emailExistsInSignups", {
+      console.log("🔍 [ensureUserInSignups] Checking if email exists:", email);
+
+      // Check if user exists
+      const checkResponse = await fetch("/api/emailExistsInSignups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      console.log("🔍 [checkUserExists] Response status:", response.status);
-      if (!response.ok) {
-        console.log("🔍 [checkUserExists] Response not OK, returning false");
-        return false;
+      console.log("🔍 [ensureUserInSignups] Check response status:", checkResponse.status);
+
+      if (!checkResponse.ok) {
+        console.log("🔍 [ensureUserInSignups] Check request failed");
+        return;
       }
-      const data = await response.json();
-      console.log("🔍 [checkUserExists] Response data:", data);
-      console.log("🔍 [checkUserExists] isRegistered:", data.isRegistered);
-      return data.isRegistered === true;
+
+      const checkData = await checkResponse.json();
+      console.log("🔍 [ensureUserInSignups] Check response data:", checkData);
+
+      // If user doesn't exist, add them
+      if (!checkData.isRegistered) {
+        console.log("🔍 [ensureUserInSignups] User not in SIGNUPs table, adding retroactively...");
+
+        // Parse name into first and last name
+        const nameParts = name?.split(" ") || [];
+        const fname = nameParts[0] || "";
+        const lname = nameParts.slice(1).join(" ") || "";
+
+        const addResponse = await fetch("/api/addToSignUpTable", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            fname,
+            lname,
+            phone: "" // No phone number from OAuth login
+          }),
+        });
+
+        if (addResponse.ok) {
+          console.log("✅ [ensureUserInSignups] User successfully added to SIGNUPs table");
+        } else {
+          console.error("❌ [ensureUserInSignups] Failed to add user to SIGNUPs table");
+        }
+      } else {
+        console.log("✅ [ensureUserInSignups] User already exists in SIGNUPs table");
+      }
     } catch (error) {
-      console.error("❌ [checkUserExists] Error checking user existence:", error);
-      return false;
+      console.error("❌ [ensureUserInSignups] Error:", error);
     }
   };
 
   useEffect(() => {
     const check = async () => {
-      console.log("🔍 [useEffect-checkUser] Running check...");
-      console.log("🔍 [useEffect-checkUser] session:", session);
-      console.log("🔍 [useEffect-checkUser] session?.user?.email:", session?.user?.email);
+      console.log("🔍 [useEffect-ensureUser] Running check...");
+      console.log("🔍 [useEffect-ensureUser] session:", session);
 
       if (session?.user?.email) {
-        console.log("🔍 [useEffect-checkUser] Session and email found, checking if user exists");
-        const exists = await checkUserExists(session.user.email);
-        console.log("🔍 [useEffect-checkUser] User exists result:", exists);
-        setEmailSignedUp(exists);
-        console.log("🔍 [useEffect-checkUser] Set emailSignedUp to:", exists);
-      } else {
-        console.log("🔍 [useEffect-checkUser] No session or email, setting emailSignedUp to false");
-        setEmailSignedUp(false);
+        console.log("🔍 [useEffect-ensureUser] Session found, ensuring user is in SIGNUPs table");
+        await ensureUserInSignups(session.user.email, session.user.name);
       }
     };
     check();
@@ -248,43 +268,17 @@ export default function MembersPage() {
             <CardTitle>Member Chat</CardTitle>
           </CardHeader>
 
-          {/*if not logged in + not signed up*/}
-          {(() => {
-            const shouldShowLoginGate = !session && !emailSignedUp;
-            console.log("🔍 [Render-LoginGate] Checking conditions:");
-            console.log("🔍 [Render-LoginGate] !session:", !session);
-            console.log("🔍 [Render-LoginGate] !emailSignedUp:", !emailSignedUp);
-            console.log("🔍 [Render-LoginGate] shouldShowLoginGate:", shouldShowLoginGate);
-            return shouldShowLoginGate ? (
-              <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
-                <div className="justify-items-center text-center space-y-4">
-                  <p className="text-gray-700 font-semibold text-lg">
-                    Please log in to chat
-                  </p>
-                  <LoginButton />
-                </div>
+          {/*Show login gate only if not logged in*/}
+          {!session && (
+            <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
+              <div className="justify-items-center text-center space-y-4">
+                <p className="text-gray-700 font-semibold text-lg">
+                  Please log in to chat
+                </p>
+                <LoginButton />
               </div>
-            ) : null;
-          })()}
-
-          {/*if logged in + not signed up*/}
-          {(() => {
-            const shouldShowSignupGate = session && !emailSignedUp;
-            console.log("🔍 [Render-SignupGate] Checking conditions:");
-            console.log("🔍 [Render-SignupGate] session:", !!session);
-            console.log("🔍 [Render-SignupGate] !emailSignedUp:", !emailSignedUp);
-            console.log("🔍 [Render-SignupGate] shouldShowSignupGate:", shouldShowSignupGate);
-            return shouldShowSignupGate ? (
-              <div className=" absolute inset-0  bg-opacity-70 backdrop-blur-md z-10 flex items-center justify-center">
-                <div className="justify-items-center text-center space-y-4">
-                  <p className="text-gray-700 font-semibold text-lg">
-                    Please sign up to chat!
-                  </p>
-                  <BecomeMemberButton />
-                </div>
-              </div>
-            ) : null;
-          })()}
+            </div>
+          )}
 
 
 
