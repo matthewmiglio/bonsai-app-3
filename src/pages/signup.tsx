@@ -39,8 +39,8 @@ export default function SignUpPage() {
       });
 
       if (response.ok) emailSuccess = true;
-    } catch (error) {
-      console.log("Error occurred while sending the email:", error);
+    } catch {
+      // Error sending email
     }
 
     try {
@@ -51,8 +51,8 @@ export default function SignUpPage() {
       });
 
       if (response.ok) tableSuccess = true;
-    } catch (error) {
-      console.log("Error occurred while adding the user:", error);
+    } catch {
+      // Error adding user
     }
 
     let message = "";
