@@ -23,7 +23,7 @@ export default function GalleryHeroCandidate1() {
           Bonsai Gallery
         </h1>
         <p className="text-xl md:text-2xl text-white/90 max-w-2xl drop-shadow-md">
-          Explore our curated collection of masterful bonsai artistry from West Michigan's finest cultivators
+          Explore our curated collection of masterful bonsai artistry from West Michigan&apos;s finest cultivators
         </p>
       </div>
     </div>

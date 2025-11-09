@@ -12,10 +12,10 @@ export default function ContactHeroCandidate2() {
           West Michigan Bonsai Club
         </div>
         <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-          Let's Connect
+          Let&apos;s Connect
         </h1>
         <p className="text-xl text-green-50 max-w-2xl mx-auto">
-          Have questions about bonsai or our club? We're here to help you grow.
+          Have questions about bonsai or our club? We&apos;re here to help you grow.
         </p>
       </div>
     </div>

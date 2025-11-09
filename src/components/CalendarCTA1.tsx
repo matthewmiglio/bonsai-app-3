@@ -11,7 +11,7 @@ export default function CalendarCTA1() {
           </div>
         </div>
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-          Don't Miss Our Next Event
+          Don&apos;t Miss Our Next Event
         </h2>
         <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
           Join us for workshops, exhibitions, and community gatherings. Have questions about upcoming events or want to get involved?

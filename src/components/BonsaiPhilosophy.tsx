@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 export default function BonsaiPhilosophy() {
   const [isVisible, setIsVisible] = useState(false);
@@ -126,7 +127,7 @@ export default function BonsaiPhilosophy() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            <a
+            <Link
               href="/about"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-600 to-green-500 text-white font-bold rounded-full hover:from-green-500 hover:to-green-400 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105"
             >
@@ -144,7 +145,7 @@ export default function BonsaiPhilosophy() {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -98,7 +98,7 @@ export default function MemberSpotlight() {
                     {member.title}
                   </p>
                   <p className="text-white/90 text-sm italic leading-relaxed">
-                    "{member.quote}"
+                    &quot;{member.quote}&quot;
                   </p>
                 </div>
 

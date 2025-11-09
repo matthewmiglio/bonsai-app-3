@@ -12,7 +12,7 @@ export default function ContactCTA2() {
                 Inspired by Our Gallery?
               </h2>
               <p className="text-lg text-green-50 mb-6">
-                Let's discuss how you can start your own bonsai journey or showcase your trees in our next exhibition.
+                Let&apos;s discuss how you can start your own bonsai journey or showcase your trees in our next exhibition.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
@@ -34,7 +34,7 @@ export default function ContactCTA2() {
                 Ready to Connect?
               </h3>
               <p className="text-gray-600 mb-6">
-                Whether you're a beginner or an experienced enthusiast, we're here to support your bonsai passion.
+                Whether you&apos;re a beginner or an experienced enthusiast, we&apos;re here to support your bonsai passion.
               </p>
               <Link
                 href="/contact"

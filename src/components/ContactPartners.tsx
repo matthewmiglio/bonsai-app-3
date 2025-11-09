@@ -9,7 +9,7 @@ export default function ContactPartners() {
       <CardContent className="p-8">
         <h2 className="text-3xl font-bold text-green-800 mb-6 text-center">Our Partners</h2>
         <p className="text-gray-600 text-center mb-8">
-          We're proud to partner with prestigious organizations in West Michigan
+          We&apos;re proud to partner with prestigious organizations in West Michigan
         </p>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">

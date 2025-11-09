@@ -134,7 +134,7 @@ export default function AboutPage() {
             Ready to Join Our Community?
           </h2>
           <p className="text-gray-700 mb-8 text-lg">
-            Whether you're a seasoned bonsai artist or just starting your
+            Whether you&apos;re a seasoned bonsai artist or just starting your
             journey, we welcome you to join our vibrant community.
           </p>
           {/* Logic for which button to show */}

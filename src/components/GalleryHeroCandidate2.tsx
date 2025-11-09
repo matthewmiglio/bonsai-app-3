@@ -12,7 +12,7 @@ export default function GalleryHeroCandidate2() {
           Community Gallery
         </h1>
         <p className="text-xl md:text-2xl text-green-50 max-w-3xl mx-auto leading-relaxed">
-          Discover the beauty and artistry of bonsai through our members' exceptional creations
+          Discover the beauty and artistry of bonsai through our members&apos; exceptional creations
         </p>
         <div className="mt-8 flex justify-center gap-4">
           <div className="text-white/90 text-center">

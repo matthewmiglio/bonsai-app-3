@@ -18,7 +18,7 @@ export default function ContactVisitorInfo() {
       <CardContent className="p-8">
         <h2 className="text-3xl font-bold mb-6">Visiting Our Club?</h2>
         <p className="text-green-50 mb-6 text-lg">
-          We welcome visitors to experience what our community has to offer. Here's what you need to know:
+          We welcome visitors to experience what our community has to offer. Here&apos;s what you need to know:
         </p>
         <div className="grid md:grid-cols-2 gap-4">
           {benefits.map((benefit, index) => (

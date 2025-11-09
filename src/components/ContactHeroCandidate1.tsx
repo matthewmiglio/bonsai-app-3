@@ -23,7 +23,7 @@ export default function ContactHeroCandidate1() {
           Get in Touch
         </h1>
         <p className="text-xl md:text-2xl text-white/95 max-w-2xl drop-shadow-lg">
-          We'd love to hear from you. Reach out to join our community or ask any questions.
+          We&apos;d love to hear from you. Reach out to join our community or ask any questions.
         </p>
       </div>
     </div>

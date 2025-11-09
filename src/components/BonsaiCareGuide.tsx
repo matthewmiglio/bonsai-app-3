@@ -1,5 +1,6 @@
 'use client';
 import Image from "next/image";
+import Link from "next/link";
 
 export default function BonsaiCareGuide() {
   const careSteps = [
@@ -81,7 +82,7 @@ export default function BonsaiCareGuide() {
         </div>
 
         <div className="text-center mt-12">
-          <a
+          <Link
             href="/about"
             className="inline-flex items-center gap-2 bg-green-700 text-white px-8 py-4 rounded-full font-semibold hover:bg-green-800 transition-all duration-300 hover:shadow-lg hover:scale-105"
           >
@@ -99,7 +100,7 @@ export default function BonsaiCareGuide() {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

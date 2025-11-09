@@ -78,13 +78,13 @@ export default function Footer() {
               >
                 <Instagram size={20} />
               </a>
-              <a
+              <Link
                 href="/contact"
                 className="w-12 h-12 bg-green-700 hover:bg-green-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
                 aria-label="Contact us via email"
               >
                 <Mail size={20} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

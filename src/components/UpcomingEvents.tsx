@@ -1,5 +1,7 @@
 'use client';
 
+import Link from "next/link";
+
 export default function UpcomingEvents() {
   const events = [
     {
@@ -117,12 +119,12 @@ export default function UpcomingEvents() {
         </div>
 
         <div className="text-center mt-12">
-          <a
+          <Link
             href="/calendar"
             className="inline-block text-white hover:text-green-200 font-semibold text-lg underline underline-offset-4 transition-colors"
           >
             View Full Calendar →
-          </a>
+          </Link>
         </div>
       </div>
 

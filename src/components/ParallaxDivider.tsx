@@ -1,13 +1,11 @@
 'use client';
 
 interface ParallaxDividerProps {
-  topColor?: string;
   bottomColor?: string;
   flip?: boolean;
 }
 
 export default function ParallaxDivider({
-  topColor = "#ffffff",
   bottomColor = "#f5f5f4",
   flip = false,
 }: ParallaxDividerProps) {

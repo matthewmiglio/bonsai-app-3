@@ -18,7 +18,7 @@ export default function AboutMission() {
             </h2>
 
             <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-              We believe bonsai is more than horticulture—it's a meditative practice, an artistic expression, and a way to connect with nature and each other.
+              We believe bonsai is more than horticulture—it&apos;s a meditative practice, an artistic expression, and a way to connect with nature and each other.
             </p>
 
             <p className="text-gray-600 leading-relaxed">

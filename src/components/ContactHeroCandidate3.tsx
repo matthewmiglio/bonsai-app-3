@@ -13,10 +13,10 @@ export default function ContactHeroCandidate3() {
               Contact Us
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-green-900 mb-4 leading-tight">
-              We're Here to Help
+              We&apos;re Here to Help
             </h1>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Whether you're curious about membership, have questions about bonsai care, or want to learn more about our events, we'd love to connect with you.
+              Whether you&apos;re curious about membership, have questions about bonsai care, or want to learn more about our events, we&apos;d love to connect with you.
             </p>
           </div>
         </div>

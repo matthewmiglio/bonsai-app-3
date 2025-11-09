@@ -21,13 +21,13 @@ export default function CalendarCTA3() {
               <div className="max-w-3xl">
                 <div className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-full mb-4">
                   <MessageSquare className="w-4 h-4" />
-                  <span className="text-sm font-semibold">Let's Connect</span>
+                  <span className="text-sm font-semibold">Let&apos;s Connect</span>
                 </div>
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
                   Questions About Our Events?
                 </h2>
                 <p className="text-xl text-gray-100 mb-8">
-                  Whether you're curious about attending, want to showcase your bonsai, or need event details—we're here to help.
+                  Whether you&apos;re curious about attending, want to showcase your bonsai, or need event details—we&apos;re here to help.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
