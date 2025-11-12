@@ -35,7 +35,7 @@ export default function ContactPage() {
                     <div className="min-w-0 flex-1">
                       <h3 className="font-medium text-gray-900 text-sm md:text-base">Email</h3>
                       <a
-                        href="mailto:matmigg0804@gmail.com"
+                        href="mailto:info@wmbonsai.com"
                         className="text-gray-600 hover:text-green-700 transition-colors text-sm md:text-base break-words"
                       >
                         info@wmbonsai.com
